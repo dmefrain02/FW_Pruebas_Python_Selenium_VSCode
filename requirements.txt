@@ -6,6 +6,7 @@ pytest
 selenium
 virtualenv
 htmlrunner
+html-testRunner
 pyodbc
 openpyxl
 PyAutoGUI
