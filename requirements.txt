@@ -1,6 +1,7 @@
 allure-behave
 allure-pytest
 allure-python-commons
+behave-html-formatter
 Pillow
 pytest
 selenium
