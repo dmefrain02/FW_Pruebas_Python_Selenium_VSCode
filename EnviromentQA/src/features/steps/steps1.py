@@ -23,9 +23,10 @@ def step_mover_arrastrar(context):
 
 @then('verifica que el elemento se ha movido a la nueva posición')
 def step_click_login(context):
-    texto = Selenium.obtener_Texto(context,'text_drop')
+    #texto = Selenium.obtener_Texto(context,'text_drop')
+    
+    assert Selenium.obtener_Texto(context,'text_drop') == 'Dropped!', "El texto no coincide con lo esperado"
     Selenium.capturar_pantalla(context)
-    assert texto == 'Dropped!', "El texto no coincide con lo esperado"
 
     Selenium.cerrar_driver_navegador(context)
     print("Navegador cerrado correctamente.")
