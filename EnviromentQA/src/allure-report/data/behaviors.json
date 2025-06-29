@@ -1,0 +1,65 @@
+{
+  "uid" : "b1a8273437954620fa374b796ffaacdd",
+  "name" : "behaviors",
+  "children" : [ {
+    "name" : "Pruebas",
+    "children" : [ {
+      "name" : "Realizar Registro y Login",
+      "children" : [ {
+        "name" : "test_001",
+        "uid" : "b9aa0f51a5066a5c",
+        "parentUid" : "4191a8d718f66a8a33f6e53ba85373a2",
+        "status" : "broken",
+        "time" : {
+          "start" : 1750611911471,
+          "stop" : 1750611944915,
+          "duration" : 33444
+        },
+        "flaky" : true,
+        "parameters" : [ ]
+      }, {
+        "name" : "test_002",
+        "uid" : "f8c747aafb18846c",
+        "parentUid" : "4191a8d718f66a8a33f6e53ba85373a2",
+        "status" : "passed",
+        "time" : {
+          "start" : 1750611945024,
+          "stop" : 1750611955115,
+          "duration" : 10091
+        },
+        "flaky" : true,
+        "parameters" : [ ]
+      } ],
+      "uid" : "4191a8d718f66a8a33f6e53ba85373a2"
+    } ],
+    "uid" : "9d789083791db31f9bc7faf366ec711a"
+  }, {
+    "name" : "Busqueda en Google",
+    "children" : [ {
+      "name" : "Realizar una búsqueda en Google",
+      "uid" : "dcb7116096202543",
+      "parentUid" : "44c7d234fe8dff24cc384e8c800c6cd4",
+      "status" : "passed",
+      "time" : {
+        "start" : 1750622489610,
+        "stop" : 1750622499347,
+        "duration" : 9737
+      },
+      "flaky" : false,
+      "parameters" : [ ]
+    }, {
+      "name" : "Mover elemento en la pantalla",
+      "uid" : "649b57e9d929e531",
+      "parentUid" : "44c7d234fe8dff24cc384e8c800c6cd4",
+      "status" : "broken",
+      "time" : {
+        "start" : 1750622499348,
+        "stop" : 1750622507760,
+        "duration" : 8412
+      },
+      "flaky" : false,
+      "parameters" : [ ]
+    } ],
+    "uid" : "44c7d234fe8dff24cc384e8c800c6cd4"
+  } ]
+}
