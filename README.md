@@ -120,58 +120,58 @@ Descripción de alto nivel de cómo está organizado el framework:
 2. En la terminal en Visual Studio Code, instalar la libreria virtualenv para activar el entorno virtual del Framework
 3. En la terminal en Visual Studio Code, activar el entorno virtual del Framework con el archivo activate en la carpeta Scripts del Enviroment.
 4. Instalar las librerias con el archivo 'requirements.txt' en la carpeta raiz del Framework en el entorno virtual activado.
-5. Realizar las configuracione necessrias para utilizar el Framework, las mismas se realizan en src/Function/Inicializar.py. Las configuraciones a realizar son las siguientes:
+5. Realizar las configuraciones necesarias para utilizar el Framework, las mismas se realizan en el archivo *src/Function/Inicializar.py*. Las configuraciones a realizar son las siguientes:
     
-    # Carpeta para guarda videos
+    *Carpeta para guarda videos*
     - Carpeta_Videos = BaseDir + u'\Data\Videos'
 
-    # Si se utiliza Selenium Grid, se debe configurar el puerto y la URL utilizado en la configuración del Hub de Selenium Grid.
+    *Si se utiliza Selenium Grid, se debe configurar el puerto y la URL utilizado en la configuración del Hub de Selenium Grid.*
     - PortSelGrid = "4444" 
     - URL_SeleniumGrid = r"http://localhost:"+PortSelGrid+"/wd/hub"
 
-    # Configurar este arreglo de navegadores según los navegadores que se quieran utilizar en las pruebas, y siguiendo la nomenclatura de navegadores dada en el metodo abrir_navegador para cada navegador. Si no se configura este arrreglo, se puede utilizar el parametro: Navegador
-    Ejemplos:
+    *Configurar este arreglo de navegadores según los navegadores que se quieran utilizar en las pruebas, y siguiendo la nomenclatura de navegadores dada en el metodo abrir_navegador para cada navegador. Si no se configura este arrreglo, se puede utilizar el parametro: Navegador*
+    *Ejemplos:*
     - Navegadores_Sel_Grid = ["Chrome_Docker","Firefox_Docker"] -> Navegadores en Selenium Grid en Docker
     - Navegadores_Sel_Grid = ["Chrome_Remote","Firefox_Remote"] -> Navegadores en Selenium Grid Local
     - Navegadores_Sel_Grid = ["Chrome","Firefox"]               -> Navegadores Locales
     
-    # Tiempo de espera utilizado dentro del Framework
+    *Tiempo de espera utilizado dentro del Framework*
     - Tiempo_Espera = 1
     
-    # Pagina en nuevo tab abierto
+    *Pagina en nuevo tab abierto*
     - Page_Tab = 'about:blank'
     
-    # Rutas utilizadas dentro del Framework
+    *Rutas utilizadas dentro del Framework*
     - Archivo_Cargar = BaseDir + r'\Archivos a Cargar\software-quality.png'
     - Ruta_Descarga = BaseDir + r'\Archivos Descargados'
     - Archivo_Descargado = "requirements.txt"
     - Bitacora= BaseDir + r'\Archivos Descargados\Pruebas Descargas Archivos.txt'
     - Imagenes_Cortadas = BaseDir + r'\Data\Imagenes Cortadas'
     
-    # Rutas y Configuraciones para la captura de evidencias en las pruebas, esta es la configuración para manejar la toma de capturas de pantallas en las pruebas
+    *Rutas y Configuraciones para la captura de evidencias en las pruebas, esta es la configuración para manejar la toma de capturas de pantallas en las pruebas*
     - Path_Evidencias = BaseDir + r'\Data\Capturas'
     - Path_Evidencias = ""
     - TestCase_x_Context = "S" #S o N
     - Warning_Capturas = "Warning: Sin configurar el Path y el contexto para las capturas de pantalla."
       
-    # Directorios de archivos Json
+    *Directorios de archivos Json*
     - Json = BaseDir + r'\Pages'
     - JsonRespondata = BaseDir + r'\Data\Json'
     
-    # Formato Hora y Fecha
+    *Formato Hora y Fecha*
     - DateFormat = '%d-%m-%Y'
     - HourFormat = '%H%M%S'
     
-    # Navegador a Utilizar
+    *Navegador a Utilizar*
     - Navegador = 'Edge'
     
-    # Ruta Excel para escribir resultados o leer datos
+    *Ruta Excel para escribir resultados o leer datos*
     - Excel_Leer_Escribir = BaseDir + r'\Data\Pruebas1.xlsx'
     
-    # Ruta Excel para crear excel
+    *Ruta Excel para crear excel*
     - Excel_Crear = BaseDir + r'\Data'
     
-    # Configuraciones para ambientes de pruebas con conexion a Base de Datos
+    *Configuraciones para ambientes de pruebas con conexion a Base de Datos*
     Enviroment == 'Dev':
     - URL_Dev = f'' #La f solo va si requerimos pasarle parametros en el link
     - USER_Dev = ''
