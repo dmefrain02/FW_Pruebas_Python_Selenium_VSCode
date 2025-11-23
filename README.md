@@ -1,8 +1,7 @@
 # FW_Pruebas_Python_Selenium
 Este es un Framework de Automatización de pruebas web con **Python** y **Selenium**, se encuentra diseñado como un framework escalable y mantenible para proyectos de calidad (QA).
 
-## Tabla de Contenidos
-
+# Tabla de Contenidos
 1. [Descripción](#Descripción)  
 2. [Motivación](#Motivación)  
 3. [Arquitectura](#Arquitectura)  
@@ -23,11 +22,11 @@ Este es un Framework de Automatización de pruebas web con **Python** y **Seleni
 18. [Versión del Framework](#Versión)
 
 ---
-## Descripción
+# Descripción
 En este framework se proporciona una base organizada para automatizar pruebas web con Selenium y Python. Utilizando buenas prácticas tales como: Page Object Model, manejo automático de versiones de los navegadores, posibilidad de utilizar contenedores Docker con Tecnologia VNC para visualizar las ejecuciones de pruebas, poder escribir/ejecutar pruebas en formato Behave y generacion de distintos tipos de reportes (Allure, Reportes Behave y Reporte Html-TestRunner)). Además, permite claridad y reusabilidad, se encuentra diseñado para integrarse en ambientes de testing avanzados (CI, diferentes entornos).
 
 ---
-## Motivación
+# Motivación
 - Evitar scripts desorganizados y difíciles de mantener.  
 - Proveer un marco homogéneo para la automatización web del equipo.  
 - Facilitar la escalabilidad: agregar nuevas pruebas, páginas o utilidades sin romper la estructura existente.  
@@ -35,7 +34,7 @@ En este framework se proporciona una base organizada para automatizar pruebas we
 - Tener integracion con herramientas de CI/CD
 
 ---
-## Arquitectura
+# Arquitectura
 Descripción de alto nivel de cómo está organizado el framework:
 | Ruta                               | Descripción                                                                                                   |
 |------------------------------------|---------------------------------------------------------------------------------------------------------------|
