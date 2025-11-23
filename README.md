@@ -3,19 +3,22 @@ Este es un Framework de Automatización de pruebas web con **Python** y **Seleni
 
 ## Tabla de Contenidos
 
-1. [Descripción](#descripción)  
-2. [Motivación](#motivación)  
-3. [Arquitectura](#arquitectura)  
-4. [Tecnologías](#tecnologías)  
-5. [Requisitos del Framework](#requisitos)  
-6. [Instalación del Framework](#instalación)  
+1. [Descripción](#Descripción)  
+2. [Motivación](#Motivación)  
+3. [Arquitectura](#Arquitectura)  
+4. [Tecnologías](#Tecnologías)  
+5. [Requisitos del Framework](#Requisitos)  
+6. [Instalación del Framework](#Instalación)  
 7. [Requisitos De Desarrollo](#Desarrollo) 
 8. [Configuración](#Configuración)  
-9. [Ejecutar Pruebas](#Ejecutar-pruebas)  
-10. [Reportes](#Reportes)  
-11. [Contribuir](#Contribuir)  
-12. [Licencia](#Licencia)  
-13. [Autor](#Autor)  
+9. [Ejecutar Pruebas](#Ejecutar-pruebas)
+10. [Evidencias](#Evidencias-pruebas)
+11. [Docker](#Ejecutar-pruebas-Docker)
+12. [Integración Continua Jenkins](#CI-CD-Jenkins)
+13. [Reportes](#Reportes)  
+14. [Contribuir](#Contribuir)  
+15. [Licencia](#Licencia)  
+16. [Autor](#Autor)  
 
 ---
 ## Descripción
@@ -55,7 +58,7 @@ Descripción de alto nivel de cómo está organizado el framework:
 | `Page Objects`                     | encapsulan la lógica de interacción con páginas web. En este framework se maneja en archivos en formato JSON. |
 
 ---
-## Tecnologías
+# Tecnologías
 - Python
 - Selenium WebDriver
 - Unittest / Behave
@@ -63,14 +66,14 @@ Descripción de alto nivel de cómo está organizado el framework:
 - Selenium Grid
 
 ---
-## Requisitos
+# Requisitos
 1. Python ≥ 3.X  
 2. WebDriver para el navegador que usarás (Chrome, Firefox, etc.) o bien tenerlos instalados para usarlos desde el manejo automatico de versiones de los navegadores (Webdriver-manager) 
 3. Paquetes de Python listados en `requirements.txt`  
 4. Variables de entorno Python
 
 ---
-## Instalación
+# Instalación
 1. Clona este repositorio:
    git clone https://github.com/dmefrain02/FW_Pruebas_Python_Selenium_VSCode.git
 
