@@ -11,13 +11,11 @@ Este es un Framework de Automatización de pruebas web con **Python** y **Seleni
 6. [Instalación del Framework](#instalación)  
 7. [Requisitos De Desarrollo](#Desarrollo) 
 8. [Configuración](#Configuración)  
-9. [Ejecutar Pruebas](#ejecutar-pruebas)  
-10. [Estructura del Proyecto](#estructura-del-proyecto)  
-11. [Cómo Extender / Agregar Nuevas Pruebas](#cómo-extender--agregar-nuevas-pruebas)  
-12. [Reporte y Logs](#reporte-y-logs)  
-13. [Contribuir](#contribuir)  
-14. [Licencia](#Licencia)  
-15. [Autor](#Autor)  
+9. [Ejecutar Pruebas](#Ejecutar-pruebas)  
+10. [Reportes](#Reportes)  
+11. [Contribuir](#Contribuir)  
+12. [Licencia](#Licencia)  
+13. [Autor](#Autor)  
 
 ---
 ## Descripción
