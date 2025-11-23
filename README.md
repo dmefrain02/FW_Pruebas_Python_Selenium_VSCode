@@ -116,11 +116,11 @@ Descripción de alto nivel de cómo está organizado el framework:
    - C:\Allure 2_9_0\plugins
 
 # Configuración
-9. Abrir el folder clonado del repositorio GitHub en Visual Studio Code
-10. En la terminal en Visual Studio Code, instalar la libreria virtualenv para activar el entorno virtual del Framework
-11. En la terminal en Visual Studio Code, activar el entorno virtual del Framework con el archivo activate en la carpeta Scripts del Enviroment.
-12. Instalar las librerias con el archivo 'requirements.txt' en la carpeta raiz del Framework en el entorno virtual activado.
-13. Realizar las configuracione necessrias para utilizar el Framework, las mismas se realizan en src/Function/Inicializar.py. Las configuraciones a realizar son las siguientes:
+1. Abrir el folder clonado del repositorio GitHub en Visual Studio Code
+2. En la terminal en Visual Studio Code, instalar la libreria virtualenv para activar el entorno virtual del Framework
+3. En la terminal en Visual Studio Code, activar el entorno virtual del Framework con el archivo activate en la carpeta Scripts del Enviroment.
+4. Instalar las librerias con el archivo 'requirements.txt' en la carpeta raiz del Framework en el entorno virtual activado.
+5. Realizar las configuracione necessrias para utilizar el Framework, las mismas se realizan en src/Function/Inicializar.py. Las configuraciones a realizar son las siguientes:
     
     # Carpeta para guarda videos
     - Carpeta_Videos = BaseDir + u'\Data\Videos'
