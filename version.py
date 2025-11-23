@@ -1,4 +1,4 @@
-__version__ = "1.0.0"
+__version__ = "3.0.0"
 
 #El versionado manual sigue el esquema SemVer (Semantic Versioning):
 #MAJOR: cambios grandes o incompatibles.
