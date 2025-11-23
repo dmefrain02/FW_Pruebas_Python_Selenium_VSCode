@@ -20,7 +20,7 @@ Este es un Framework de Automatización de pruebas web con **Python** y **Seleni
 15. [Contribuir](#Contribuir)  
 16. [Licencia](#Licencia)  
 17. [Autor](#Autor)  
-18. [Versión del Framework](#Versión del Framework)
+18. [Versión del Framework](#Versión)
 
 ---
 ## Descripción
@@ -185,7 +185,7 @@ Descripción de alto nivel de cómo está organizado el framework:
     - Cadena_Conexion_Dev = 'DRIVER={ODBC Driver 17 for SQL Server}; SERVER=EFRAIN-CD\EFRAINCD;DATABASE=Pruebas_Automatizadas_Python_DEV;UID=EFRAIN_ACD;PWD=114660137'
     - Se puede replicar estas 3 variables para ambientes de QA, UAT y Produccion.
 
-# Versión del Framework
+# Versión
   📌 La versión actual del framework es: **1.0.0**  
 
 # Licencia
