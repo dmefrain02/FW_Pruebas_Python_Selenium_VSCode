@@ -125,35 +125,35 @@ Descripción de alto nivel de cómo está organizado el framework:
 4. Instalar las librerias con el archivo 'requirements.txt' en la carpeta raiz del Framework en el entorno virtual activado.
 5. Realizar las configuraciones necesarias para utilizar el Framework, las mismas se realizan en el archivo **src/Function/Inicializar.py**. Las configuraciones a realizar son las siguientes:
     
-    **Directorio Base - Obtiene la ruta del directorio src del proyecto**
+    **Directorio Base - Obtiene la ruta del directorio src del proyecto** 
     Esta variable obtiene el directorio raíz del proyecto, que es la direccion a partir de donde se construyen las demás rutas que  se utilizan en el Framework.
     BaseDir = os.path.abspath(os.path.join(__file__,"../.."))
 
-    **Carpeta para guarda videos**
+    **Carpeta para guarda videos** 
     Ruta donde se almancenaran los videos que se guarden como evidencias de rutas.
     - Carpeta_Videos = BaseDir + u'\Data\Videos'
 
-    **Si se utiliza Selenium Grid, se debe configurar el puerto y la URL utilizado en la configuración del Hub de Selenium Grid.**
+    **Si se utiliza Selenium Grid, se debe configurar el puerto y la URL utilizado en la configuración del Hub de Selenium Grid.** 
     Configuración para ejecutar pruebas utilizando selenium grid.
     - PortSelGrid = "4444" 
     - URL_SeleniumGrid = r"http://localhost:"+PortSelGrid+"/wd/hub"
 
-    **Configurar este arreglo de navegadores según los navegadores que se quieran utilizar en las pruebas, y siguiendo la nomenclatura de navegadores dada en el metodo abrir_navegador para cada navegador. Si no se configura este arrreglo, se puede utilizar el parametro: Navegador**
+    **Configurar este arreglo de navegadores según los navegadores que se quieran utilizar en las pruebas, y siguiendo la nomenclatura de navegadores dada en el metodo abrir_navegador para cada navegador. Si no se configura este arrreglo, se puede utilizar el parametro: Navegador** 
     Arreglo para utilizar multi-browers en la ejecución de las pruebas.
     **Ejemplos:**
     - Navegadores_Sel_Grid = ["Chrome_Docker","Firefox_Docker"] -> Navegadores en Selenium Grid en Docker
     - Navegadores_Sel_Grid = ["Chrome_Remote","Firefox_Remote"] -> Navegadores en Selenium Grid Local
     - Navegadores_Sel_Grid = ["Chrome","Firefox"]               -> Navegadores Locales
     
-    **Tiempo de espera utilizado dentro del Framework**
+    **Tiempo de espera utilizado dentro del Framework** 
     Parámetro para realizar tiempos de espera informales en la ejecución de las pruebas.
     - Tiempo_Espera = 1
     
-    **Pagina en nuevo tab abierto**
+    **Pagina en nuevo tab abierto** 
     Parámetro para definir el nombre del tab al abrir nuevos tab en la ejecución de las pruebas.
     - Page_Tab = 'about:blank'
     
-    **Rutas utilizadas dentro del Framework**
+    **Rutas utilizadas dentro del Framework** 
     Estás rutas permiten guardar archivos o tomar archivos durante la ejecución de pruebas.
     - Archivo_Cargar = BaseDir + r'\Archivos a Cargar\software-quality.png'
     - Ruta_Descarga = BaseDir + r'\Archivos Descargados'
@@ -161,36 +161,36 @@ Descripción de alto nivel de cómo está organizado el framework:
     - Bitacora= BaseDir + r'\Archivos Descargados\Pruebas Descargas Archivos.txt'
     - Imagenes_Cortadas = BaseDir + r'\Data\Imagenes Cortadas'
     
-    **Rutas y Configuraciones para la captura de evidencias en las pruebas, esta es la configuración para manejar la toma de capturas de pantallas en las pruebas**
+    **Rutas y Configuraciones para la captura de evidencias en las pruebas, esta es la configuración para manejar la toma de capturas de pantallas en las pruebas** 
     Estás rutas y parámetros permiten realizar la configuración para poder tomar capturas de pantalla durante la ejecución de pruebas.
     - Path_Evidencias = BaseDir + r'\Data\Capturas'
     - Path_Evidencias = ""
     - TestCase_x_Context = "S" #S o N
     - Warning_Capturas = "Warning: Sin configurar el Path y el contexto para las capturas de pantalla."
         
-    **Directorios de archivos Json**
+    **Directorios de archivos Json** 
     Ruta donde se almacenan los archivos JSON de las clases Pages con los localizadores de las páginas de pruebas.
     - Json = BaseDir + r'\Pages'
     - JsonRespondata = BaseDir + r'\Data\Json'
     
-    **Formato Hora y Fecha**
+    **Formato Hora y Fecha** 
     Configuración de los formatos de fecha y hora que seran utilizados por el Framework
     - DateFormat = '%d-%m-%Y'
     - HourFormat = '%H%M%S'
     
-    **Navegador a Utilizar**
+    **Navegador a Utilizar** 
     Parámetro que define el navegador a utilizarn en la ejecución de pruebas
     - Navegador = 'Edge'
     
-    **Ruta Excel para escribir resultados o leer datos**
+    **Ruta Excel para escribir resultados o leer datos** 
     Variable para leer un archivo Excel con datos de pruebas.
     - Excel_Leer_Escribir = BaseDir + r'\Data\Pruebas1.xlsx'
     
-    **Ruta Excel para crear excel**
+    **Ruta Excel para crear excel** 
     Variable para crear un archivo excel que se pueda utilizar en las pruebas.
     - Excel_Crear = BaseDir + r'\Data'
     
-    **Configuraciones para ambientes de pruebas con conexion a Base de Datos**
+    **Configuraciones para ambientes de pruebas con conexion a Base de Datos** 
     Para hacer uso de bases de datos tomando datos de tablas, se requiere configurar alguna de las secciones de conexión a bases de de datos.
     #Enviroment == 'Dev':
     URL_Dev = f'' #La f solo va si requerimos pasarle parametros en el link
@@ -211,7 +211,7 @@ Descripción de alto nivel de cómo está organizado el framework:
     URL_PROD = f'' #La f solo va si requerimos pasarle parametros en el link
     USER_PROD = ''
     Cadena_Conexion_Prod = 'DRIVER={ODBC Driver 17 for SQL Server}; SERVER=[Servidor BD];DATABASE=[Base de Datos];UID=[User Base de Datos];PWD=[Contraseña Base de Datos]
-    
+
 # Versión
   📌 La versión actual del framework es: **3.0.0**  
 
