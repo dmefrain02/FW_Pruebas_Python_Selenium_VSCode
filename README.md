@@ -107,7 +107,8 @@ Descripción de alto nivel de cómo está organizado el framework:
    - C:\Python\Lib\site-packages
    - C:\Python\Scripts
    - C:\Python\Scripts\pip.exe
-8. Crear las siguientes variables de entorno de Allure:
+8. Descargar las librerias para generar reportes Allure localmente: https://repo1.maven.org/maven2/io/qameta/allure/allure-commandline/2.9.0/ 
+9. Crear las variables de entorno de Allure:
    - C:\Allure 2_9_0
    - C:\Allure 2_9_0\bin
    - C:\Allure 2_9_0\bin\allure.bat
