@@ -76,7 +76,7 @@ Descripción de alto nivel de cómo está organizado el framework:
 1. Clona este repositorio:
    git clone https://github.com/dmefrain02/FW_Pruebas_Python_Selenium_VSCode.git
 
-# Requisitos De Desarrollo
+# Desarrollo
 1. Descargar Python de la pagina oficial: https://www.python.org/downloads/
 2. Instalar Python en el equipo local.
 3. Descargar Visual Studio Code de la pagina oficial: https://code.visualstudio.com/Download
