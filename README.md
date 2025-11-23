@@ -181,8 +181,8 @@ Descripción de alto nivel de cómo está organizado el framework:
     - Se puede replicar estas 3 variables para ambientes de QA, UAT y Produccion.
 
 # Licencia
-Este Framework de automatizacion de prueba se encuentra bajo licencia de uso MIT.
 ![GitHub License](https://img.shields.io/github/license/dmefrain02/FW_Pruebas_Python_Selenium_VSCode)
+Este Framework de automatizacion de prueba se encuentra bajo licencia de uso MIT.
 
 # Autor
 **Ing. en Sistemas Efraín Castañeda Delgado, Costa Rica**
