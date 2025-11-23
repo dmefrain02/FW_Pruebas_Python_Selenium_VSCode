@@ -1,5 +1,5 @@
 # FW_Pruebas_Python_Selenium
-*Este es un Framework de Automatización de pruebas web con **Python** y **Selenium**, se encuentra diseñado como un framework escalable y mantenible para proyectos de calidad (QA).*
+Este es un Framework de Automatización de pruebas web con **Python** y **Selenium**, se encuentra diseñado como un framework escalable y mantenible para proyectos de calidad (QA).
 
 # Tabla de Contenidos
 1. [Descripción](#Descripción)  
@@ -23,19 +23,19 @@
 
 ---
 # Descripción
-*En este framework se proporciona una base organizada para automatizar pruebas web con Selenium y Python. Utilizando buenas prácticas tales como: Page Object Model, manejo automático de versiones de los navegadores, posibilidad de utilizar contenedores Docker con Tecnologia VNC para visualizar las ejecuciones de pruebas, poder escribir/ejecutar pruebas en formato Behave y generacion de distintos tipos de reportes (Allure, Reportes Behave y Reporte Html-TestRunner). Además, permite claridad y reusabilidad, se encuentra diseñado para integrarse en ambientes de testing avanzados (CI, diferentes entornos).*
+En este framework se proporciona una base organizada para automatizar pruebas web con Selenium y Python. Utilizando buenas prácticas tales como: Page Object Model, manejo automático de versiones de los navegadores, posibilidad de utilizar contenedores Docker con Tecnologia VNC para visualizar las ejecuciones de pruebas, poder escribir/ejecutar pruebas en formato Behave y generacion de distintos tipos de reportes (Allure, Reportes Behave y Reporte Html-TestRunner). Además, permite claridad y reusabilidad, se encuentra diseñado para integrarse en ambientes de testing avanzados (CI, diferentes entornos).
 
 ---
 # Motivación
-*- Evitar scripts desorganizados y difíciles de mantener.* 
-*- Proveer un marco homogéneo para la automatización web del equipo.*  
-*- Facilitar la escalabilidad: agregar nuevas pruebas, páginas o utilidades sin romper la estructura existente.* 
-*- Generar reportes legibles y tener logging estructurado.*
-*- Tener integracion con herramientas de CI/CD.*
+- Evitar scripts desorganizados y difíciles de mantener.
+- Proveer un marco homogéneo para la automatización web del equipo.
+- Facilitar la escalabilidad: agregar nuevas pruebas, páginas o utilidades sin romper la estructura existente. 
+- Generar reportes legibles y tener logging estructurado.
+- Tener integracion con herramientas de CI/CD.
 
 ---
 # Arquitectura
-*Descripción de alto nivel de cómo está organizado el framework:*
+Descripción de alto nivel de cómo está organizado el framework:
 | Ruta                               | Descripción                                                                                                   |
 |------------------------------------|---------------------------------------------------------------------------------------------------------------|
 | `/src`                             | Carpeta raíz del framework                                                                                    |
@@ -60,11 +60,11 @@
 
 ---
 # Tecnologías
-*- Python*
-*- Selenium WebDriver*
-*- Unittest / Behave*
-*- Docker*
-*- Selenium Grid*
+- Python
+- Selenium WebDriver
+- Unittest / Behave
+- Docker
+- Selenium Grid
 
 ---
 # Requisitos
@@ -189,7 +189,7 @@
 
 # Licencia
 ![GitHub License](https://img.shields.io/github/license/dmefrain02/FW_Pruebas_Python_Selenium_VSCode)
-*Este Framework de automatizacion de prueba se encuentra bajo licencia de uso MIT.*
+Este Framework de automatizacion de prueba se encuentra bajo licencia de uso MIT.
 
 # Autor
 **Ing. en Sistemas Efraín Castañeda Delgado, Costa Rica**
