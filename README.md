@@ -33,26 +33,6 @@ En este framework se proporciona una base organizada para automatizar pruebas we
 ---
 ## Arquitectura
 Descripción de alto nivel de cómo está organizado el framework:
-
-/src -> Carpeta raiz del Framework
-/Pages                        # Objetos de página (Page Objects). Son archivos en formato Json para manejar los localizadores utilizados en las pruebas.
-/Test                         # Casos de prueba
-/Function/Functions.py        # Funciones selenium y de framework para realizar las pruebas
-/Function/Inicializar.py      # Configuraciones utilizadas en el Framework
-/Features                     # Pruebas escritas en formato behave (formato Gherkins)
-/Features/steps               # Pasos de las pruebas en formato behave (formato Gherkins)
-/Drivers                      # WebDrivers de los navegadores para utilizarlos
-/Docker                       # Configuraciones e imagenes docker que se quieran utilizar
-/Data/Capturas                # Almacenamiento de capturas de las pruebas
-/Data/Videos                  # Almacenamiento de grabaciones de las pruebas
-/Data                         # Archivos con datos de pruebas
-/selenium_grid                # Configuraciones para ejecutar pruebas en selenium grid tanto localmente como en Docker.
-/report/reporthtmltestrunner  # Reportes con la libreria HtmlTestRunner
-/report/reports               # Reportes con la libreria Allure
-/report/reportBehave          # Reportes generados con Behave
-/Archivos a Cargar            # Archivos cargados en las pruebas 
-/Archivos Descargados         # Archivos descargados en las pruebas
-
 - **/src** → Carpeta raíz del Framework  
 - **/Pages** → Objetos de página (Page Objects). Archivos JSON con localizadores.  
 - **/Test** → Casos de prueba  
@@ -71,7 +51,6 @@ Descripción de alto nivel de cómo está organizado el framework:
 - **/report/reportBehave** → Reportes generados por Behave  
 - **/Archivos a Cargar** → Archivos utilizados para pruebas  
 - **/Archivos Descargados** → Archivos descargados durante las pruebas  
-
 - **Page Objects**: encapsulan la lógica de interacción con páginas web. En este framework se maneja en archivos en formato JSON. 
 
 ---
