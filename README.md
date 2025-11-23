@@ -185,8 +185,8 @@ Descripción de alto nivel de cómo está organizado el framework:
     - Cadena_Conexion_Dev = 'DRIVER={ODBC Driver 17 for SQL Server}; SERVER=EFRAIN-CD\EFRAINCD;DATABASE=Pruebas_Automatizadas_Python_DEV;UID=EFRAIN_ACD;PWD=114660137'
     - Se puede replicar estas 3 variables para ambientes de QA, UAT y Produccion.
 
-# 📌 Versión-del-Framework
-    - La versión actual del framework es: **1.0.0**  
+# Versión-del-Framework
+  📌 La versión actual del framework es: **1.0.0**  
 
 # Licencia
 ![GitHub License](https://img.shields.io/github/license/dmefrain02/FW_Pruebas_Python_Selenium_VSCode)
