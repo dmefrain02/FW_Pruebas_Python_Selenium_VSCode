@@ -31,7 +31,6 @@ En este framework se proporciona una base organizada para automatizar pruebas we
 - Generar reportes legibles y tener logging estructurado.
 - Tener integracion con herramientas de CI/CD.
 
----
 # Arquitectura
 Descripción de alto nivel de cómo está organizado el framework:
 | Ruta                               | Descripción                                                                                                   |
