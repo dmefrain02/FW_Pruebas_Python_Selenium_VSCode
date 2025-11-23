@@ -16,7 +16,7 @@ Este es un Framework de Automatización de pruebas web con **Python** y **Seleni
 11. [Cómo Extender / Agregar Nuevas Pruebas](#cómo-extender--agregar-nuevas-pruebas)  
 12. [Reporte y Logs](#reporte-y-logs)  
 13. [Contribuir](#contribuir)  
-14. [Licencia](#licencia)  
+14. [Licencia](#Licencia)  
 15. [Autores](#autores)  
 
 ---
@@ -181,3 +181,6 @@ Descripción de alto nivel de cómo está organizado el framework:
     - USER_Dev = ''
     - Cadena_Conexion_Dev = 'DRIVER={ODBC Driver 17 for SQL Server}; SERVER=EFRAIN-CD\EFRAINCD;DATABASE=Pruebas_Automatizadas_Python_DEV;UID=EFRAIN_ACD;PWD=114660137'
     - Se puede replicar estas 3 variables para ambientes de QA, UAT y Produccion.
+
+# Licencia
+Este Framework de automatizacion de prueba se encuentra bajo licencia de uso MIT: #LICENSE
