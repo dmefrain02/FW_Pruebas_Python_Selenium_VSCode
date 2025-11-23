@@ -53,6 +53,25 @@ Descripción de alto nivel de cómo está organizado el framework:
 /Archivos a Cargar            # Archivos cargados en las pruebas 
 /Archivos Descargados         # Archivos descargados en las pruebas
 
+- **/src** → Carpeta raíz del Framework  
+- **/Pages** → Objetos de página (Page Objects). Archivos JSON con localizadores.  
+- **/Test** → Casos de prueba  
+- **/Function/Functions.py** → Funciones Selenium y utilidades del framework  
+- **/Function/Inicializar.py** → Configuraciones generales del framework (rutas utilzadas y demás configuraciones)
+- **/Features** → Pruebas escritas en formato Behave (Gherkin)  
+- **/Features/steps** → Pasos (steps) de pruebas Behave  
+- **/Drivers** → WebDrivers de los navegadores  
+- **/Docker** → Configuraciones e imágenes Docker para ejecución  
+- **/Data/Capturas** → Capturas de pantalla de pruebas  
+- **/Data/Videos** → Grabaciones de pruebas  
+- **/Data** → Archivos de datos del framework  
+- **/selenium_grid** → Configuraciones para ejecución en Selenium Grid local o Docker  
+- **/report/reportHtmltestrunner** → Reportes HtmlTestRunner  
+- **/report/reports** → Reportes Allure  
+- **/report/reportBehave** → Reportes generados por Behave  
+- **/Archivos a Cargar** → Archivos utilizados para pruebas  
+- **/Archivos Descargados** → Archivos descargados durante las pruebas  
+
 - **Page Objects**: encapsulan la lógica de interacción con páginas web. En este framework se maneja en archivos en formato JSON. 
 
 ---
