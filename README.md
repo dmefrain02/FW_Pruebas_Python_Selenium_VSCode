@@ -120,11 +120,11 @@ Descripción de alto nivel de cómo está organizado el framework:
     # Carpeta para guarda videos
     - Carpeta_Videos = BaseDir + u'\Data\Videos'
 
-    # Si se utilizara Selenium Grid, se debe configurar el puerto y la URL utilizado en la configuración del Hub de Selenium Grid sea que se encuentre instalado localmente o en una imagen de Docker.
+    # Si se utiliza Selenium Grid, se debe configurar el puerto y la URL utilizado en la configuración del Hub de Selenium Grid.
     - PortSelGrid = "4444" 
-    URL_SeleniumGrid = r"http://localhost:"+PortSelGrid+"/wd/hub"
+    - URL_SeleniumGrid = r"http://localhost:"+PortSelGrid+"/wd/hub"
 
-    # Configurar este arreglo de navegadores según los navegadores que se quieran utilizar para las pruebas, y siguiendo la nomenclatura de navegadores dada en el metodo abrir_navegador para cada navegador.
+    # Configurar este arreglo de navegadores según los navegadores que se quieran utilizar en las pruebas, y siguiendo la nomenclatura de navegadores dada en el metodo abrir_navegador para cada navegador. Si no se configura este arrreglo, se puede utilizar el parametro: Navegador
     Ejemplos:
     - Navegadores_Sel_Grid = ["Chrome_Docker","Firefox_Docker"] -> Navegadores en Selenium Grid en Docker
     - Navegadores_Sel_Grid = ["Chrome_Remote","Firefox_Remote"] -> Navegadores en Selenium Grid Local
