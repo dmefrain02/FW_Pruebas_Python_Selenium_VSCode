@@ -18,7 +18,7 @@ class Inicializar():
     #Directorio Base - Obtiene la ruta del directorio src del proyecto
     BaseDir = os.path.abspath(os.path.join(__file__,"../.."))
     
-    Carpeta_Videos = BaseDir + u'\Videos'
+    Carpeta_Videos = BaseDir + u'\Data\Videos'
     
     #Variable en el archivo inicializar
     PortSelGrid = "4444"
