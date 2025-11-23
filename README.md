@@ -17,7 +17,7 @@ Este es un Framework de Automatización de pruebas web con **Python** y **Seleni
 12. [Reporte y Logs](#reporte-y-logs)  
 13. [Contribuir](#contribuir)  
 14. [Licencia](#Licencia)  
-15. [Autores](#Autores)  
+15. [Autor](#Auto)  
 
 ---
 ## Descripción
@@ -185,5 +185,5 @@ Descripción de alto nivel de cómo está organizado el framework:
 # Licencia
 Este Framework de automatizacion de prueba se encuentra bajo licencia de uso MIT.
 
-# Autores
+# Autor
 **Ing. en Sistemas Efraín Castañeda Delgado, Costa Rica**
