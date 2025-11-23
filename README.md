@@ -34,7 +34,7 @@ En este framework se proporciona una base organizada para automatizar pruebas we
 ## Arquitectura
 Descripción de alto nivel de cómo está organizado el framework:
 
-/src -> Carpeta raiz del Framework\n
+/src -> Carpeta raiz del Framework
 /Pages                        # Objetos de página (Page Objects). Son archivos en formato Json para manejar los localizadores utilizados en las pruebas.
 /Test                         # Casos de prueba
 /Function/Functions.py        # Funciones selenium y de framework para realizar las pruebas
