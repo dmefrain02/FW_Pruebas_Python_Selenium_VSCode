@@ -183,4 +183,4 @@ Descripción de alto nivel de cómo está organizado el framework:
     - Se puede replicar estas 3 variables para ambientes de QA, UAT y Produccion.
 
 # Licencia
-Este Framework de automatizacion de prueba se encuentra bajo licencia de uso MIT: #LICENSE
+Este Framework de automatizacion de prueba se encuentra bajo licencia de uso MIT.
