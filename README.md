@@ -11,14 +11,16 @@ Este es un Framework de Automatización de pruebas web con **Python** y **Seleni
 6. [Instalación del Framework](#Instalación)  
 7. [Requisitos De Desarrollo](#Desarrollo) 
 8. [Configuración](#Configuración)  
-9. [Ejecutar Pruebas](#Ejecutar-pruebas)
-10. [Evidencias](#Evidencias-pruebas)
-11. [Docker](#Ejecutar-pruebas-Docker)
-12. [Integración Continua Jenkins](#CI-CD-Jenkins)
-13. [Reportes](#Reportes)  
-14. [Contribuir](#Contribuir)  
-15. [Licencia](#Licencia)  
-16. [Autor](#Autor)  
+9. [Ejecutar Pruebas Python](#Ejecutar-pruebas-pyhon)
+10. [Ejecutar Pruebas Python Behave](#Ejecutar-pruebas-pyhon-behave)
+11. [Evidencias](#Evidencias-pruebas)
+12. [Docker](#Ejecutar-pruebas-Docker)
+13. [Integración Continua Jenkins](#CI-CD-Jenkins)
+14. [Reportes](#Reportes)  
+15. [Contribuir](#Contribuir)  
+16. [Licencia](#Licencia)  
+17. [Autor](#Autor)  
+18. [Version](#Version)
 
 ---
 ## Descripción
@@ -182,6 +184,10 @@ Descripción de alto nivel de cómo está organizado el framework:
     - USER_Dev = ''
     - Cadena_Conexion_Dev = 'DRIVER={ODBC Driver 17 for SQL Server}; SERVER=EFRAIN-CD\EFRAINCD;DATABASE=Pruebas_Automatizadas_Python_DEV;UID=EFRAIN_ACD;PWD=114660137'
     - Se puede replicar estas 3 variables para ambientes de QA, UAT y Produccion.
+
+# Version
+## 📌 Versión del Framework
+    - La versión actual del framework es: **1.0.0**  
 
 # Licencia
 ![GitHub License](https://img.shields.io/github/license/dmefrain02/FW_Pruebas_Python_Selenium_VSCode)
