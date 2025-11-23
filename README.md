@@ -21,11 +21,9 @@ Este es un Framework de Automatización de pruebas web con **Python** y **Seleni
 17. [Autor](#Autor)  
 18. [Versión del Framework](#Versión)
 
----
 # Descripción
 En este framework se proporciona una base organizada para automatizar pruebas web con Selenium y Python. Utilizando buenas prácticas tales como: Page Object Model, manejo automático de versiones de los navegadores, posibilidad de utilizar contenedores Docker con Tecnologia VNC para visualizar las ejecuciones de pruebas, poder escribir/ejecutar pruebas en formato Behave y generacion de distintos tipos de reportes (Allure, Reportes Behave y Reporte Html-TestRunner). Además, permite claridad y reusabilidad, se encuentra diseñado para integrarse en ambientes de testing avanzados (CI, diferentes entornos).
 
----
 # Motivación
 - Evitar scripts desorganizados y difíciles de mantener.
 - Proveer un marco homogéneo para la automatización web del equipo.
@@ -57,8 +55,8 @@ Descripción de alto nivel de cómo está organizado el framework:
 | `src/Archivos a Cargar`            | Archivos utilizados para pruebas                                                                              |
 | `src/Archivos Descargados`         | Archivos descargados durante las pruebas                                                                      |
 | `Page Objects`                     | encapsulan la lógica de interacción con páginas web. En este framework se maneja en archivos en formato JSON. |
+|------------------------------------|---------------------------------------------------------------------------------------------------------------|
 
----
 # Tecnologías
 - Python
 - Selenium WebDriver
@@ -66,14 +64,12 @@ Descripción de alto nivel de cómo está organizado el framework:
 - Docker
 - Selenium Grid
 
----
 # Requisitos
 1. Python ≥ 3.X  
 2. WebDriver para el navegador que usarás (Chrome, Firefox, etc.) o bien tenerlos instalados para usarlos desde el manejo automatico de versiones de los navegadores (Webdriver-manager) 
 3. Paquetes de Python listados en `requirements.txt`  
 4. Variables de entorno Python
 
----
 # Instalación
 1. Clona este repositorio:
    git clone https://github.com/dmefrain02/FW_Pruebas_Python_Selenium_VSCode.git
