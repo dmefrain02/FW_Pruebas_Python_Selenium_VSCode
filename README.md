@@ -17,7 +17,7 @@ Este es un Framework de Automatización de pruebas web con **Python** y **Seleni
 12. [Reporte y Logs](#reporte-y-logs)  
 13. [Contribuir](#contribuir)  
 14. [Licencia](#Licencia)  
-15. [Autor](#Auto)  
+15. [Autor](#Autor)  
 
 ---
 ## Descripción
