@@ -19,3 +19,4 @@ webdriver-manager
 aspose-pdf
 behave
 Jinja2
+requests
