@@ -9,14 +9,15 @@ Este es un Framework de Automatización de pruebas web con **Python** y **Seleni
 4. [Tecnologías](#tecnologías)  
 5. [Requisitos del Framework](#requisitos)  
 6. [Instalación del Framework](#instalación)  
-7. [Configuración del Framework](#configuración)  
-8. [Ejecutar Pruebas](#ejecutar-pruebas)  
-9. [Estructura del Proyecto](#estructura-del-proyecto)  
-10. [Cómo Extender / Agregar Nuevas Pruebas](#cómo-extender--agregar-nuevas-pruebas)  
-11. [Reporte y Logs](#reporte-y-logs)  
-12. [Contribuir](#contribuir)  
-13. [Licencia](#licencia)  
-14. [Autores](#autores)  
+7. [Requisitos De Desarrollo](#Desarrollo) 
+8. [Configuración](#Configuracion)  
+9. [Ejecutar Pruebas](#ejecutar-pruebas)  
+10. [Estructura del Proyecto](#estructura-del-proyecto)  
+11. [Cómo Extender / Agregar Nuevas Pruebas](#cómo-extender--agregar-nuevas-pruebas)  
+12. [Reporte y Logs](#reporte-y-logs)  
+13. [Contribuir](#contribuir)  
+14. [Licencia](#licencia)  
+15. [Autores](#autores)  
 
 ---
 ## Descripción
@@ -33,25 +34,27 @@ En este framework se proporciona una base organizada para automatizar pruebas we
 ---
 ## Arquitectura
 Descripción de alto nivel de cómo está organizado el framework:
-- **/src** → Carpeta raíz del Framework  
-- **/Pages** → Objetos de página (Page Objects). Archivos JSON con localizadores.  
-- **/Test** → Casos de prueba  
-- **/Function/Functions.py** → Funciones Selenium y utilidades del framework  
-- **/Function/Inicializar.py** → Configuraciones generales del framework (rutas utilzadas y demás configuraciones)
-- **/Features** → Pruebas escritas en formato Behave (Gherkin)  
-- **/Features/steps** → Pasos (steps) de pruebas Behave  
-- **/Drivers** → WebDrivers de los navegadores  
-- **/Docker** → Configuraciones e imágenes Docker para ejecución  
-- **/Data/Capturas** → Capturas de pantalla de pruebas  
-- **/Data/Videos** → Grabaciones de pruebas  
-- **/Data** → Archivos de datos del framework  
-- **/selenium_grid** → Configuraciones para ejecución en Selenium Grid local o Docker  
-- **/report/reportHtmltestrunner** → Reportes HtmlTestRunner  
-- **/report/reports** → Reportes Allure  
-- **/report/reportBehave** → Reportes generados por Behave  
-- **/Archivos a Cargar** → Archivos utilizados para pruebas  
-- **/Archivos Descargados** → Archivos descargados durante las pruebas  
-- **Page Objects**: encapsulan la lógica de interacción con páginas web. En este framework se maneja en archivos en formato JSON. 
+| Ruta                               | Descripción                                                                                                   |
+|------------------------------------|---------------------------------------------------------------------------------------------------------------|
+| `/src`                             | Carpeta raíz del framework                                                                                    |
+| `/src/Pages`                       | Objetos de página (Page Objects) en archivos JSON                                                             |
+| `/src/Test`                        | Casos de prueba                                                                                               |
+| `/src/Function/Functions.py`       | Funciones Selenium y utilidades del Framework                                                                 |
+| `src/Function/Inicializar.py`      | Configuraciones generales del framework (rutas utilzadas y demás configuraciones)                             |
+| `src/Features`                     | Pruebas escritas en formato Behave (Gherkin)                                                                  |
+| `src/Features/steps`               | Pasos (steps) de pruebas Behave                                                                               |
+| `src/Drivers`                      | WebDrivers de los navegadores                                                                                 |
+| `src/Docker`                       | Configuraciones e imágenes Docker para ejecución                                                              |
+| `src/Data/Capturas`                | Capturas de pantalla de pruebas                                                                               |
+| `src/Data/Videos`                  | Grabaciones de pruebas                                                                                        |
+| `src/Data`                         | Archivos de datos del framework                                                                               |
+| `src/selenium_grid`                | Configuraciones para ejecución en Selenium Grid local o Docker                                                | 
+| `src/report/reportHtmltestrunner`  | Reportes HtmlTestRunner                                                                                       |
+| `src/report/reports`               | Reportes Allure                                                                                               |
+| `src/report/reportBehave`          | Reportes generados por Behave                                                                                 |
+| `src/Archivos a Cargar`            | Archivos utilizados para pruebas                                                                              |
+| `src/Archivos Descargados`         | Archivos descargados durante las pruebas                                                                      |
+| `Page Objects`                     | encapsulan la lógica de interacción con páginas web. En este framework se maneja en archivos en formato JSON. |
 
 ---
 ## Tecnologías
@@ -73,7 +76,7 @@ Descripción de alto nivel de cómo está organizado el framework:
 1. Clona este repositorio:
    git clone https://github.com/dmefrain02/FW_Pruebas_Python_Selenium_VSCode.git
 
-# Configuración
+# Requisitos De Desarrollo
 1. Descargar Python de la pagina oficial: https://www.python.org/downloads/
 2. Instalar Python en el equipo local.
 3. Descargar Visual Studio Code de la pagina oficial: https://code.visualstudio.com/Download
@@ -111,6 +114,8 @@ Descripción de alto nivel de cómo está organizado el framework:
    - C:\Allure 2_9_0\lib
    - C:\Allure 2_9_0\config
    - C:\Allure 2_9_0\plugins
+
+# Configuración
 9. Abrir el folder clonado del repositorio GitHub en Visual Studio Code
 10. En la terminal en Visual Studio Code, instalar la libreria virtualenv para activar el entorno virtual del Framework
 11. En la terminal en Visual Studio Code, activar el entorno virtual del Framework con el archivo activate en la carpeta Scripts del Enviroment.
