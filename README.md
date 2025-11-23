@@ -55,7 +55,6 @@ Descripción de alto nivel de cómo está organizado el framework:
 | `src/Archivos a Cargar`            | Archivos utilizados para pruebas                                                                              |
 | `src/Archivos Descargados`         | Archivos descargados durante las pruebas                                                                      |
 | `Page Objects`                     | encapsulan la lógica de interacción con páginas web. En este framework se maneja en archivos en formato JSON. |
-|------------------------------------|---------------------------------------------------------------------------------------------------------------|
 
 # Tecnologías
 - Python
