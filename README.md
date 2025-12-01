@@ -210,7 +210,7 @@ Descripción de alto nivel de cómo está organizado el framework:
   📌 La versión actual del framework es: **3.0.0**  
 
 # Licencia
-![GitHub License](https://img.shields.io/github/license/dmefrain02/FW_Pruebas_Python_Selenium_VSCode)
+![GitHub License](https://img.shields.io/github/license/dmefrain02/FW_Pruebas_Python_Selenium_VSCode) </br>
 Este Framework de automatizacion de prueba se encuentra bajo licencia de uso MIT.
 
 # Autor
