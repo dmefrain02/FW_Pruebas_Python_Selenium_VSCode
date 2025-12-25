@@ -1,11 +1,11 @@
 echo ## Ir a la carpeta del archivo ##
-cd "C:\Users\dmefr\Desktop\FW_Pruebas_Python_Selenium\FW_Pruebas_Python_Selenium\EnviromentQA1\src"
+cd "C:\Users\dmefr\OneDrive\Escritorio\Proyecto_Python_Selenium\src"
 
 echo ## Ejecucion del Archivo desde la Consola ##
-python -m pytest test44.py --alluredir allure-results
+python -m pytest Test\pytest.py --alluredir allure-results
 
 echo ## Fin de la ejecucion del archivo ##
 pause
-allure generate "C:\Users\dmefr\Desktop\FW_Pruebas_Python_Selenium\FW_Pruebas_Python_Selenium\EnviromentQA1\src\allure-results" --output "C:\Users\dmefr\Desktop\FW_Pruebas_Python_Selenium\FW_Pruebas_Python_Selenium\EnviromentQA1\src\allure-report" --clean
+allure generate "C:\Users\dmefr\OneDrive\Escritorio\Proyecto_Python_Selenium\src\allure-results" --output "C:\Users\dmefr\OneDrive\Escritorio\Proyecto_Python_Selenium\src\allure-report" --clean
 
 pause
