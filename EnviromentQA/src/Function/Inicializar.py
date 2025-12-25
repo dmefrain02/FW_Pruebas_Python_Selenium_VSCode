@@ -46,8 +46,8 @@ class Inicializar():
     TestCase_x_Context = "S" #S o N
     Warning_Capturas = "Warning: Sin configurar el Path y el contexto para las capturas de pantalla."
       
-    #Directorio Json
-    Json = BaseDir + r'\Pages'
+    #Directorio Localizadores en formato JSON
+    Json = BaseDir + r'\Localizadores'
     JsonRespondata = BaseDir + r'\Data\Json'
     
     #Formato Hora y Fecha

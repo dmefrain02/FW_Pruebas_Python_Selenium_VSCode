@@ -413,7 +413,6 @@ class Functions(Inicializar):
     #Obtener Archivo JSON con los localizadores por medio del nombre      
     def obtener_archivo_json(self,file):
         json_ruta = Inicializar.Json + "/"+file+'.json'
-        
         try:
             with open(json_ruta,'r')as read_file:
                 self.json_strings = json.loads(read_file.read())
@@ -424,6 +423,7 @@ class Functions(Inicializar):
         except FileNotFoundError:
             self.json_strings =False
             pytest.skip(u'Obtener Archivo Json: No se encontro el archivo json' + file)
+            obtener_archivo_json
             Functions.cerrar_driver_navegador(self)
      
     #Obtener entidad de elemento en el archivo JSON       

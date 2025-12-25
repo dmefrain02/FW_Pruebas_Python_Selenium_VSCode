@@ -1,10 +1,12 @@
 from src.Function.Functions import Functions as Selenium
 import unittest
 import HtmlTestRunner
+from src.Pages.HomePage_MercadoLibre import HomePage_MercadoLibre as MercadoLibre
 
 class Test(unittest.TestCase):
 
     def setUp(self):
+        #self.home = MercadoLibre(self)
         Selenium.abrir_navegador(self, 'Chrome')
         Selenium.obtener_archivo_json(self, 'Localizadores_Spotify')
 
