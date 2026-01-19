@@ -340,13 +340,13 @@ class Functions(Inicializar):
     #Metodo para encontrar elementos en el DOM
     def encontrando_elementos_en_el_DOM(self,estrategia_busqueda, valor_busqueda):
         try:
-            if estrategia_busqueda == "xpath":
+            if estrategia_busqueda == "XPATH":
                 elemento = self.driver.find_element(By.XPATH, valor_busqueda)
                 print(u'ID_Elements: Se esta interactuando con el elemento: ' + valor_busqueda)
-            elif estrategia_busqueda == "name":
+            elif estrategia_busqueda == "NAME":
                 elemento = self.driver.find_element(By.NAME, valor_busqueda)
                 print(u'ID_Elements: Se esta interactuando con el elemento: ' + valor_busqueda)
-            elif estrategia_busqueda == "id":
+            elif estrategia_busqueda == "ID":
                 elemento = self.driver.find_element(By.ID, valor_busqueda)
                 print(u'ID_Elements: Se esta interactuando con el elemento: ' + valor_busqueda)
             else:
@@ -365,7 +365,7 @@ class Functions(Inicializar):
     #Metodo para encontrar elementos en el DOM
     def encontrando_elementos_en_el_DOM_con_tiempo_espera(self,estrategia_busqueda, valor_busqueda, tiempo_espera):
         try:
-            if estrategia_busqueda == "xpath":
+            if estrategia_busqueda == "XPATH":
                 wait = WebDriverWait(self.driver,tiempo_espera)
                 print(u'Esperando que el elemento se visualice: ' + valor_busqueda)
                 wait.until(EC.visibility_of_element_located((By.XPATH,valor_busqueda)))
@@ -375,7 +375,7 @@ class Functions(Inicializar):
                 print('uElemento Encontrado:' + valor_busqueda)
                 print(u'ID_Elements: Se esta interactuando con el elemento: ' + valor_busqueda)
             
-            elif estrategia_busqueda == "name":
+            elif estrategia_busqueda == "NAME":
                 wait = WebDriverWait(self.driver,tiempo_espera)
                 print(u'Esperando que el elemento se visualice: ' + valor_busqueda)
                 wait.until(EC.visibility_of_element_located((By.NAME,valor_busqueda)))
@@ -385,7 +385,7 @@ class Functions(Inicializar):
                 print('uElemento Encontrado:' + valor_busqueda)
                 print(u'ID_Elements: Se esta interactuando con el elemento: ' + valor_busqueda)
             
-            elif estrategia_busqueda == "id":
+            elif estrategia_busqueda == "ID":
                 wait = WebDriverWait(self.driver,tiempo_espera)
                 print(u'Esperando que el elemento se visualice: ' + valor_busqueda)
                 wait.until(EC.visibility_of_element_located((By.ID,valor_busqueda)))
@@ -423,28 +423,32 @@ class Functions(Inicializar):
         except FileNotFoundError:
             self.json_strings =False
             pytest.skip(u'Obtener Archivo Json: No se encontro el archivo json' + file)
-            obtener_archivo_json
             Functions.cerrar_driver_navegador(self)
      
     #Obtener entidad de elemento en el archivo JSON       
-    def obtener_entidad(self,entidad):
+    def obtener_entidad(self,*entidad):
         if self.json_strings is False:
             print(u'Define el DOM de la prueba')
         else:
             try:
-                self.json_ValueToFind =self.json_strings[entidad]["ValueToFind"]
-                self.json_GetFieldBy = self.json_strings[entidad]["GetFieldBy"]
-                print(u"Se encontro la entidad: " + entidad  + " con los valores: " + self.json_ValueToFind + " y " + self.json_GetFieldBy)
+                node = self.json_strings
+                for p in entidad:
+                    node = node[p]
+
+                self.json_ValueToFind = node["ValueToFind"]
+                self.json_GetFieldBy =  node["GetFieldBy"].upper()
+                
+                print(f"Se encontraron los valores en el JSON para la entidad utilizada: " + str(entidad) + " con los valores " + self.json_GetFieldBy + " y " + self.json_ValueToFind)
                 return True
             
             except KeyError:
-                pytest.skip(u"Obtener Entidad: no se encontro la Key a la cual se hace referencia" + entidad)
+                pytest.skip(u"Obtener Entidad: no se encontro la Key a la cual se hace referencia" + str(entidad))
                 Functions.cerrar_driver_navegador(self)
                 return None 
             
     #Obtener elemento apartir de la entidad en el archivo JSON  
-    def obtener_elemento(self,entidad):
-        Obtener_Entidad = Functions.obtener_entidad(self, entidad)
+    def obtener_elemento(self,*entidad):
+        Obtener_Entidad = Functions.obtener_entidad(self, *entidad)
         
         if Obtener_Entidad is None:
             print (u'No se encontro el valor de la entidad en el doc. Json')
@@ -653,7 +657,8 @@ class Functions(Inicializar):
                 Functions.cerrar_driver_navegador()
             except TimeoutException:
                 print(u'Esperar explicita, no se encontro o no se visualizo el elemento luego de la espera: ' + locator + ' con el valor: ' + self.json_ValueToFind)
-                Functions.cerrar_driver_navegador()             
+                Functions.cerrar_driver_navegador()      
+    
     def WebdriverWait(self,time):
         WebDriverWait(self.driver,time)
     
@@ -853,13 +858,13 @@ class Functions(Inicializar):
         else:
             try:
                 if self.json_GetFieldBy.lower()=='id':
-                    Functions.escribir_texto(self, entidad, txt_ruta_archivo)
+                    Functions.escribir_texto(self, *entidad, txt_ruta_archivo)
                     print(u'Se cargo el archivo en el elemento: '+ entidad + ' con el valor: ' + self.json_ValueToFind)
                 if self.json_GetFieldBy.lower()=='name':
-                    Functions.escribir_texto(self, entidad, txt_ruta_archivo)
+                    Functions.escribir_texto(self, *entidad, txt_ruta_archivo)
                     print(u'Se cargo el archivo en el elemento: '+ entidad + ' con el valor: ' + self.json_ValueToFind)
                 if self.json_GetFieldBy.lower()=='xpath':
-                    Functions.escribir_texto(self, entidad, txt_ruta_archivo)
+                    Functions.escribir_texto(self, *entidad, txt_ruta_archivo)
                     print(u'Se cargo el archivo en el elemento: '+ entidad + ' con el valor: ' + self.json_ValueToFind)
                     
             except NoSuchElementException:
@@ -881,7 +886,6 @@ class Functions(Inicializar):
         return self.assertTrue(elemento.is_displayed()==True,msj)
     def Assert_In_Elemento(self,texto_contenido, texto_ingresado_alert):
         return self.assertIn(texto_contenido, f'{texto_ingresado_alert}')
-                  
     #Mover Mouse en aplicativo web
     def Mover_Mouse_x_App_Web(self,entidad):
         action = ActionChains(self.driver)
@@ -898,7 +902,7 @@ class Functions(Inicializar):
         except TimeoutException:
             print(u'Mover_mouse: no se encontro el elemento, ' + self.json_ValueToFind)
             Functions.cerrar_driver_navegador(self)  
-    
+
     #Arrastrar y Soltar: Drag & Drop
     def Arrastrar_y_Soltar(self,elemento_drag, elemento_drop):
         action = ActionChains(self.driver)

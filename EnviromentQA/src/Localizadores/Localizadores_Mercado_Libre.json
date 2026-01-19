@@ -1,15 +1,19 @@
 {
-	"Busqueda_Mercado_Libre":{
-		"GetFieldBy":"xpath",
-		"ValueToFind":"//input[@id='cb1-edit']"		
+	"Home":{
+		"Busqueda_Mercado_Libre":{
+			"GetFieldBy":"xpath",
+			"ValueToFind":"//input[@id='cb1-edit']"		
+		}
+	},
+	"Google":{
+		"txt_busqueda_google":{
+			"GetFieldBy":"id",
+			"ValueToFind":"APjFqb"
+		}
 	},
 	"Producto_Buscado":{
 		"GetFieldBy":"xpath",
 		"ValueToFind":"//body/main[@id='root-app']/div[1]/div[2]/section[1]/div[5]/ol[1]/li[1]/div[1]/div[1]/div[1]/div[2]/h3[1]"
-	},
-	"txt_busqueda_google":{
-		"GetFieldBy":"id",
-		"ValueToFind":"APjFqb"
 	},
 	"carga_archivo":{
 		"GetFieldBy": "xpath",

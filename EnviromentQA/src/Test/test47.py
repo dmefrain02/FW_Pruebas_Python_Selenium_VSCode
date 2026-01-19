@@ -9,9 +9,9 @@ import threading
 class Test(unittest.TestCase):
 
     def setUp(self):
-        Selenium.obtener_archivo_json(self, 'Localizadores_Spotify')
+        Selenium.obtener_archivo_json(self, 'Localizadores_Mercado_Libre')
         
-    def test_01(self):
+    def Test_01(self):
         for Nav_Sel_Grid in Inicializar.Navegadores_Sel_Grid:
             Selenium.abrir_navegador(self,Nav_Sel_Grid, True)
             Selenium.get_url_driver(self,"https://demoqa.com/alerts")
@@ -71,6 +71,11 @@ class Test(unittest.TestCase):
             Selenium.alert_navegadores(self,0,"You clicked a button","No se muestra el mensaje correcto")
             Selenium.WebdriverWait(self,2)
             Selenium.cerrar_driver_navegador(self)
+
+    def test_07(self):
+        Selenium.abrir_navegador(self,"Chrome")
+        Selenium.get_url_driver(self,"https://www.mercadolibre.co.cr/")
+        Selenium.obtener_elemento(self, "Home", "Busqueda_Mercado_Libre")
 
     def tearDown(self):
         #Selenium.cerrar_driver_navegador(self)
