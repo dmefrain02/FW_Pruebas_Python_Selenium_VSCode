@@ -31,6 +31,11 @@ from selenium.webdriver.common.alert import Alert
 
 from selenium.webdriver.remote import remote_connection
 
+import cv2
+import numpy as np
+from mss import mss
+import threading
+
 #from selenium.webdriver.common.print_page_options import PrintOptions as PrintOptions
 #import base64
 #import aspose.pdf as ap
@@ -1075,111 +1080,42 @@ class Functions(Inicializar):
         Functions.esperar_elemento(self)
      
     #Metodos para grabar videos (screen record) en las pruebas.  
-    
-    """Verifica si FFmpeg está disponible"""
-    def inicializar_video(self, framerate = 30, formato=Inicializar.Formato_Video, nombrearchivo_video = Inicializar.VideoPruebas, output_dir = Inicializar.Carpeta_Videos):
-              
-        self.formato = formato.lower()
-        self.output_video = output_dir
-        self.filename = f"{nombrearchivo_video}.{formato}"
-        self.output_file = os.path.join(self.output_video,self.filename)
-        self.framerate = framerate
-        os.makedirs(self.output_video, exist_ok=True)
-        
-        self.ffmpeg_path = Inicializar.ffmpeg_path
-        self.ffmpeg_process = None
+    def configurar_entorno_grabacion(self):
+        self.recording = True
+        self.sct = mss()
+        self.monitor = self.sct.monitors[1]
+        self.fourcc = cv2.VideoWriter_fourcc(*"mp4v")
+        self.out = cv2.VideoWriter(
+            "recording.mp4",
+            self.fourcc,
+            20.0,
+            (self.monitor["width"], self.monitor["height"]))
 
-        # Validar si el formato es soportado
-        '''if formato not in Inicializar.Formatos_Soportados:
-            raise ValueError(f"Formato '{self.formato}' no soportado. Formatos válidos: {list(self.SUPPORTED_FORMATS.keys())}")
-        else:
-            print(f'Formatos soportados validos')'''
+        self.recording_thread = threading.Thread(
+            target= self.record_screen,
+            daemon=True
+        )       
+        self.recording_thread.start()
 
-        # Verificar si FFmpeg está instalado
-        if not Functions.valida_ffmpeg(self):
-            raise FileNotFoundError("FFmpeg no encontrado. Agrega FFmpeg al PATH o proporciona la ruta completa.")
-        else:
-            print(f'FFmpeg validado en {Inicializar.ffmpeg_path}')
-        
-    """Verifica si FFmpeg está disponible en el sistema"""    
-    def valida_ffmpeg(self):
-        
-        try:
-            subprocess.run([self.ffmpeg_path, "-version"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, check=True)
-            return True
-        except (subprocess.CalledProcessError, FileNotFoundError):
-            return False
-    
-    """Inicia la grabación de pantalla con FFmpeg"""   
-    def start_recording(self):
-        try:
-            '''comando = [
-               Inicializar.ffmpeg_path,
-                "-y",  # Sobrescribe el archivo si ya existe
-                "-f", "gdigrab",  # Captura la pantalla en Windows
-                "-framerate", "30",  # FPS
-                "-i", "desktop",  # Captura toda la pantalla
-                "-c:v", "libx264", "-preset", "ultrafast", "-crf", "25",  # Compresión rápida
-                self.output_file  # Nombre del archivo de salida
-                ]'''     
-            '''codec_info = Inicializar.Formatos_Soportados[self.formato]
-            Inicializar.ffmpeg_path = [
-                self.ffmpeg_path,
-                "-y",
-                "-f", "gdigrab",
-                "-framerate", "30",
-                "-i", "desktop",
-                "-c:v", codec_info["codec"]
-            ] + codec_info["extra"] + [self.output_file]'' 
-            codec_info = Inicializar.Formatos_Soportados[self.formato]
-            Inicializar.ffmpeg_path = [
-                self.ffmpeg_path,
-                "-y",
-                "-f", "gdigrab",
-                "-framerate", "30",
-                "-i", "desktop",
-                "-c:v", 
-                codec_info["codec"],
-                codec_info["extra"],
-                self.output_file
-            ]'''
-                
-            self.process = subprocess.Popen([
-            "ffmpeg", "-y", "-f", "gdigrab", "-framerate", str(self.framerate),
-            "-i", "desktop", self.output_file
-        ], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-            
-            print(f"Grabación iniciada... Guardando en: {self.output_file}")
-        except Exception as e:
-            print(f"Error al iniciar FFmpeg: {e}")
-    
-    """Detiene la grabación de pantalla"""    
-    def stop_recording(self):
-        self.process.terminate()
-        print(f"Grabación finalizada. Video guardado en: {self.output_file}")
-    
-    '''def inicializar_video(self,height_size, width_size,fps,nombre_arh_video,Ruta_Grabacion=Inicializar.Ruta_Grabacion):
-        self.screen_size = (height_size,width_size)
-        self.fps = fps
-        self.output_filename = Ruta_Grabacion + f'\{nombre_arh_video}'
-        
-        self.format = cv2.VideoWriter_fourcc(*"XVID")
-        self.salida = cv2.VideoWriter(self.output_filename,self.format,self.fps,self.screen_size)
-        print('Se inicializo la grabacion')
-        return self.salida   
-    def grabar(self,salida):
-        self.frame = pyautogui.screenshot()
-        self.frame = np.array(self.frame)
-        
-        self.frame = cv2.cvtColor(self.frame,cv2.COLOR_BGR2RGB)
-        
-        salida.write(self.frame)
-        return salida   
-    def terminar_grabacion(self,salida):
-        salida.release()
-        cv2.destroyAllWindows()
-        print('Se finaliza la grabación del video')'''
-   
+    def record_screen(self):
+        while self.recording:
+
+            img = np.array(
+                self.sct.grab(self.monitor)
+            )
+
+            frame = cv2.cvtColor(
+                img,
+                cv2.COLOR_BGRA2BGR
+            )
+            self.out.write(frame)
+            time.sleep(0.01)
+
+    def detener_grabacion(self):
+        self.recording = False
+        self.recording_thread.join(timeout=2)
+        self.out.release()
+
     def alert_navegadores(self,tipo_alert,texto_esperado="", msj="",texto_contenido ="", elemento="",texto_ingresado=""):
         self.alert = Alert(self.driver)
         self.text_alert = self.alert.text
@@ -1207,30 +1143,4 @@ class Functions(Inicializar):
             print('Mensaje de alert: ' + self.text_alert)
             self.alert.send_keys(texto_ingresado)
             self.alert.accept()
-            Functions.Assert_In_Elemento(self,texto_contenido, Functions.obtener_Texto(self, elemento))
-    
-    ''' grabar segunda opcion, revisar graba bien solo el primer frame'''
-    def inicializar(self, framerate = 30, formato=Inicializar.Formato_Video, nombrearchivo_video = Inicializar.VideoPruebas, output_dir = Inicializar.Carpeta_Videos):
-        self.formato = formato.lower()
-        self.output_video = output_dir
-        self.filename = f"{nombrearchivo_video}.{self.formato}"
-        self.output_file = os.path.join(self.output_video,self.filename)
-        self.framerate = framerate
-        self.resolution = pyautogui.size()
-        os.makedirs(self.output_video, exist_ok=True)
-        fourcc = cv2.VideoWriter_fourcc(*("XVID" if self.formato == "avi" else "mp4v"))
-        self.out = cv2.VideoWriter(self.output_file,fourcc,self.framerate,self.resolution)
-        
-    def start(self,duracion = 10):
-        start_time = time.time()
-        while time.time()- start_time < duracion:
-            img = pyautogui.screenshot()
-            frame = np.array(img)
-            #frame = cv2.cvtColor(frame,cv2.Color_RGB2BGR)
-            self.out.write(frame)
-            #self.stop()
-        
-    def stop(self):
-        self.out.release()
-        print(f"Video guardado en: {self.output_file}")
-        
+            Functions.Assert_In_Elemento(self,texto_contenido, Functions.obtener_Texto(self, elemento))    
