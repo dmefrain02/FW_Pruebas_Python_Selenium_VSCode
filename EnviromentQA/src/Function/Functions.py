@@ -685,8 +685,7 @@ class Functions(Inicializar):
         fecha = Functions.obtener_fecha_actual(self)
         GeneralPath = Inicializar.Path_Evidencias
         print(f'Ruta General de las Capturas: {GeneralPath}')
-        DriverTest = self.Nav_utilizado_capturas
-            
+        DriverTest = self.Nav_utilizado_capturas            
         TestCase =self.__class__.__name__
         HoraActual = Functions.obtener_hora_actual(self)
         
@@ -709,8 +708,29 @@ class Functions(Inicializar):
             
             return path
         else:
-            return Inicializar.Warning_Capturas
-            
+            return Inicializar.Warning_Evidencias
+        
+    def crear_path_evidencias_video(self):
+        fecha = Functions.obtener_fecha_actual(self)
+        GeneralPath = Inicializar.Path_Videos
+        print(f'Ruta General de las Capturas: {GeneralPath}')
+        DriverTest = self.Nav_utilizado_capturas
+        TestCase =self.__class__.__name__
+        HoraActual = Functions.obtener_hora_actual(self)
+        if (Inicializar.Path_Videos != ""):
+            path = f"{GeneralPath}\{fecha}\{TestCase}\{DriverTest}\{HoraActual}"
+            print(f"Ruta Contruida para guardar los videos: {path}")
+        elif (Inicializar.Path_Videos == ""):
+            path = f'{Inicializar.BaseDir}\Videos\{fecha}\{TestCase}\{DriverTest}\{HoraActual}'
+            print(f'No se encuentra establecida la ruta para guardar los videos, se guardara en la carpeta raiz del framework de pruebas.\nEn: {path}')
+
+        if (path != ""):
+            if not os.path.exists(path):
+                os.makedirs(path)
+                return path
+            else:
+                return Inicializar.Warning_Evidencias
+
     #Realizar captura de pantalla
     def capturar_pantalla(self):
         Path=Functions.crear_path(self)
@@ -1085,18 +1105,25 @@ class Functions(Inicializar):
         self.sct = MSS()
         self.monitor = self.sct.monitors[1]
         self.fourcc = cv2.VideoWriter_fourcc(*"mp4v")
-        self.out = cv2.VideoWriter(
-            Functions.obtener_fecha_actual(self) + "_" + Functions.obtener_hora_actual(self) + "_recording.mp4",
-            self.fourcc,
-            20.0,
-            (self.monitor["width"], self.monitor["height"])
-            )
+        
+        self.video_path = Functions.crear_path_evidencias_video(self)
+        self.nombre_video = f"{self.video_path}\{Functions.obtener_fecha_actual(self)}_{Functions.obtener_hora_actual(self)}_recording.mp4"
 
-        self.recording_thread = threading.Thread(
-            target= self.record_screen,
-            daemon=True
-        )       
-        self.recording_thread.start()
+        if self.video_path != Inicializar.Warning_Evidencias:
+            self.out = cv2.VideoWriter(
+                self.nombre_video,
+                self.fourcc,
+                20.0,
+                (self.monitor["width"], self.monitor["height"])
+                )
+
+            self.recording_thread = threading.Thread(
+                target= self.record_screen,
+                daemon=True
+            )       
+            self.recording_thread.start()
+        else:
+            print(Inicializar.Warning_Evidencias)
 
     def record_screen(self):
         while self.recording:
