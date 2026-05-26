@@ -1086,7 +1086,7 @@ class Functions(Inicializar):
         self.monitor = self.sct.monitors[1]
         self.fourcc = cv2.VideoWriter_fourcc(*"mp4v")
         self.out = cv2.VideoWriter(
-            "recording.mp4",
+            Functions.obtener_fecha_actual(self) + "_" + Functions.obtener_hora_actual(self) + "_recording.mp4",
             self.fourcc,
             20.0,
             (self.monitor["width"], self.monitor["height"])
