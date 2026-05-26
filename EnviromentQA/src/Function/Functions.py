@@ -33,7 +33,7 @@ from selenium.webdriver.remote import remote_connection
 
 import cv2
 import numpy as np
-from mss import mss
+from mss import MSS
 import threading
 
 #from selenium.webdriver.common.print_page_options import PrintOptions as PrintOptions
@@ -1082,7 +1082,7 @@ class Functions(Inicializar):
     #Metodos para grabar videos (screen record) en las pruebas.  
     def configurar_entorno_grabacion(self): 
         self.recording = True
-        self.sct = mss()
+        self.sct = MSS()
         self.monitor = self.sct.monitors[1]
         self.fourcc = cv2.VideoWriter_fourcc(*"mp4v")
         self.out = cv2.VideoWriter(
@@ -1111,7 +1111,7 @@ class Functions(Inicializar):
             )
             self.out.write(frame)
             time.sleep(0.01)
-
+            
     def detener_grabacion(self):
         self.recording = False
         self.recording_thread.join(timeout=2)
