@@ -2,17 +2,10 @@
 import unittest
 from src.Function.Functions import Functions as Selenium
 from src.Function.Inicializar import Inicializar
-import time
-import subprocess
-import cv2
-import numpy as np
-from mss import mss
-import threading
 
 class Test(unittest.TestCase):
 
     def setUp(self):
-
         Selenium.obtener_archivo_json(self, 'Localizadores_Spotify')
         Selenium.abrir_navegador(self,"Chrome")
         self.functions = Selenium() 
