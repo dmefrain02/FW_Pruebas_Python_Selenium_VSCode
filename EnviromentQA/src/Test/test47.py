@@ -12,39 +12,11 @@ import threading
 class Test(unittest.TestCase):
 
     def setUp(self):
+
         Selenium.obtener_archivo_json(self, 'Localizadores_Spotify')
         Selenium.abrir_navegador(self,"Chrome")
-        #Selenium.configurar_entorno_grabacion(self)
-
-        self.recording = True
-        self.sct = mss()
-        self.monitor = self.sct.monitors[1]
-        self.fourcc = cv2.VideoWriter_fourcc(*"mp4v")
-        self.out = cv2.VideoWriter(
-            "recording.mp4",
-            self.fourcc,
-            20.0,
-            (self.monitor["width"], self.monitor["height"]))
-
-        self.recording_thread = threading.Thread(
-            target=self.record_screen,
-            daemon=True
-        )
-        self.recording_thread.start()
-
-    def record_screen(self):
-        while self.recording:
-
-            img = np.array(
-                self.sct.grab(self.monitor)
-            )
-
-            frame = cv2.cvtColor(
-                img,
-                cv2.COLOR_BGRA2BGR
-            )
-            self.out.write(frame)
-            time.sleep(0.01)
+        self.functions = Selenium() 
+        self.functions.configurar_entorno_grabacion()
 
     def Test_01(self):
         for Nav_Sel_Grid in Inicializar.Navegadores_Sel_Grid:
@@ -125,12 +97,7 @@ class Test(unittest.TestCase):
         #Selenium.Mover_Mouse(self, "Home", "Busqueda_Mercado_Libre", "Home", "Busqueda_Mercado_Libre")
 
     def tearDown(self):
-        self.recording = False
-        self.recording_thread.join(timeout=2)
-        self.out.release()
-        #Selenium.detener_grabacion(self)
-        #cv2.out.destroyAllWindows()
-        
+        self.functions.detener_grabacion()      
         Selenium.cerrar_driver_navegador(self)
 
 if __name__ == "__main__":

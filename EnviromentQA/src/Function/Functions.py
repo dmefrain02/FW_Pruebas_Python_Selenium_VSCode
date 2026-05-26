@@ -702,7 +702,7 @@ class Functions(Inicializar):
         elif (((Inicializar.TestCase_x_Context !="S") or (Inicializar.TestCase_x_Context !="N") or (Inicializar.TestCase_x_Context == "")) and (GeneralPath == "")): 
             path = ""
             print(f'No se logro crear el path para guardar la captura de pantalla. Variables de "TestCase_x_Context" y "GeneralPath" no se han configurado correctamente: Tienen el valor: {GeneralPath} y {Inicializar.TestCase_x_Context}')
-        
+
         if (path != ""):
             if not os.path.exists(path):
                 os.makedirs(path)
@@ -1080,7 +1080,7 @@ class Functions(Inicializar):
         Functions.esperar_elemento(self)
      
     #Metodos para grabar videos (screen record) en las pruebas.  
-    def configurar_entorno_grabacion(self):
+    def configurar_entorno_grabacion(self): 
         self.recording = True
         self.sct = mss()
         self.monitor = self.sct.monitors[1]
@@ -1089,7 +1089,8 @@ class Functions(Inicializar):
             "recording.mp4",
             self.fourcc,
             20.0,
-            (self.monitor["width"], self.monitor["height"]))
+            (self.monitor["width"], self.monitor["height"])
+            )
 
         self.recording_thread = threading.Thread(
             target= self.record_screen,

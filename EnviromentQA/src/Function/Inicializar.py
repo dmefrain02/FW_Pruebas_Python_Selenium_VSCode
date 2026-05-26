@@ -1,24 +1,9 @@
 # -*- coding: utf-8 -*-
 import os
 
-class Inicializar():
-    
-    #Nombre por defecto video grabado en pruebas
-    VideoPruebas = "Video_Prueba"
-    Formato_Video = "mp4"
-    ffmpeg_path = r"C:\ffmpeg\bin\ffmpeg.exe"
-    
-    '''Formatos_Soportados = {
-        "mp4": {"codec": "libx264", "extra": ["-preset", "ultrafast", "-crf", "25"]},
-        "avi": {"codec": "libxvid", "extra": ["-q:v", "5"]},
-        "mkv": {"codec": "libx264", "extra": ["-preset", "medium", "-crf", "23"]},
-        "webm": {"codec": "libvpx", "extra": ["-b:v", "1M"]}
-    }'''
-    
+class Inicializar():  
     #Directorio Base - Obtiene la ruta del directorio src del proyecto
     BaseDir = os.path.abspath(os.path.join(__file__,"../.."))
-    
-    Carpeta_Videos = BaseDir + u'\Data\Videos'
     
     #Variable en el archivo inicializar
     PortSelGrid = "4444"
@@ -42,6 +27,7 @@ class Inicializar():
     Imagenes_Cortadas = BaseDir + r'\Data\Imagenes Cortadas'
     Ruta_Grabacion= BaseDir + r'\Data\Grabaciones'
     Path_Evidencias = BaseDir + r'\Data\Capturas'
+    Path_Videos = BaseDir + r'\Data\Videos'
     #Path_Evidencias = ""
     TestCase_x_Context = "S" #S o N
     Warning_Capturas = "Warning: Sin configurar el Path y el contexto para las capturas de pantalla."
