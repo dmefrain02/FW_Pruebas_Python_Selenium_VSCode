@@ -25,10 +25,8 @@ from selenium.webdriver.support.ui import Select
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.keys import Keys
-
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.common.alert import Alert
-
 from selenium.webdriver.remote import remote_connection
 
 import cv2
@@ -48,30 +46,19 @@ import json
 import pytest
 import time
 import openpyxl
-from idlelib.calltip import get_entity
 import re # para expresiones regulares
 import os # para capturas
 import allure
 import pyodbc
 from allure_commons.types import AttachmentType
-from pickle import NONE
-#from pkg_resources._vendor.jaraco.functools import except_
-#from _pytest.threadexception import catch_threading_exception
-from http.cookiejar import Cookie
 from PIL import Image #Pillow - Manejo de Imagenes
 from io import BytesIO #Para conocer tamaños en bytes, ya esta instalado en Python
-
-import pyautogui
 import cv2
 import numpy as np
 from unittest.case import skip
 from threading import Thread,Barrier
 from numpy._core._multiarray_umath import rindex
 from selenium.webdriver.common import desired_capabilities
-from numpy.lib.tests.test__datasource import valid_baseurl
-import subprocess
-from sys import stderr
-from email.errors import MessageError
 
 class Functions(Inicializar):
     
@@ -687,6 +674,7 @@ class Functions(Inicializar):
         print(f'Ruta General de las Capturas: {GeneralPath}')
         DriverTest = self.Nav_utilizado_capturas            
         TestCase =self.__class__.__name__
+
         HoraActual = Functions.obtener_hora_actual(self)
         
         if   ((Inicializar.TestCase_x_Context =="S") and (GeneralPath != "")):
