@@ -64,6 +64,7 @@ class Functions(Inicializar):
     
     Nav_utilizado_capturas = ""
     
+    # Diccionario para mapear las estrategias de búsqueda a los valores de By
     BY = {
         "ID": By.ID,
         "NAME": By.NAME,
