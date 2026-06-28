@@ -92,7 +92,8 @@ class Functions(Inicializar):
                 self.driver = self.Driver.get_driver()
             elif navegador ==("Firefox"):
                 self.driver = self.Driver.get_driver()
-
+            return self.driver
+        
         # Manejo de los Drivers en DriverFactory para los navegadores remotos en Selenium Grid
         elif (navegador == ("Chrome_Remote")) or (navegador == ("Edge_Remote")) or (navegador == ("Firefox_Remote")):
             self.Driver = DriverFactory(navegador,Remote,capabilities,URL_SeleniumGrid,PortSelGrid)
@@ -102,70 +103,22 @@ class Functions(Inicializar):
                 self.driver = self.Driver.get_driver()
             if navegador == ("Firefox_Remote"):
                 self.driver = self.Driver.get_driver()
-                
+            return self.driver
+            
         # Manejo de los Drivers en DriverFactory para los navegadores remotos en Selenium Grid con Docker
-        elif navegador == ("Chrome_Docker"):
-            self.driver = Functions.get_driver(self,navegador,Remote,URL_SeleniumGrid)
-        elif navegador == ("Edge_Docker"):
-            self.driver = Functions.get_driver(self,navegador,Remote,URL_SeleniumGrid)
-        elif navegador == ("Firefox_Docker"):
-            self.driver = Functions.get_driver(self,navegador,Remote,URL_SeleniumGrid)  
+        elif (navegador == ("Chrome_Docker")) or (navegador == ("Edge_Docker")) or (navegador == ("Firefox_Docker")):
+            self.Driver = DriverFactory(navegador,Remote,capabilities,URL_SeleniumGrid,PortSelGrid)
+            if navegador == ("Chrome_Docker"):
+                self.driver = self.Driver.get_driver()
+            if navegador == ("Edge_Docker"):
+                self.driver = self.Driver.get_driver()
+            if navegador == ("Firefox_Docker"):
+                self.driver = self.Driver.get_driver()
+            return self.driver
+
         else:
              raise ValueError(f"Navegador {navegador} no se encuentra soportado.")
-        
-        return self.driver
-            
-    def _create_chrome_sel_grid_docker_driver(self, grid_url):
-        try:
-            options = webdriver.ChromeOptions()
-            self.driver = webdriver.Remote(
-                command_executor= grid_url,
-                options=options
-            ) 
-            return self.driver
-        except NewConnectionError:
-                print(u'Error: No se logro abrir la instancia del navegador remoto.')
-                raise ValueError(f"Error: Instancia del Navegador Remoto no se logro abrir.")
-                Functions.cerrar_driver_navegador(self)
-        except MaxRetryError:
-                print(u'Error: No se logro abrir la instancia del navegador remoto.')
-                raise ValueError(f"Error: Instancia del Navegador Remoto no se logro abrir.")
-                Functions.cerrar_driver_navegador(self)
-            
-    def _create_edge_sel_grid_docker_driver(self, grid_url):
-        try:
-            options = OpcionesEdge();
-            options.add_argument("start-maximized")
-            options.add_argument("inprivate")
-            #options.add_argument("headless")
-            self.driver = webdriver.Remote(grid_url,options=options)
-            return self.driver
-        except NewConnectionError:
-                print(u'Error: No se logro abrir la instancia del navegador remoto.')
-                raise ValueError(f"Error: Instancia del Navegador Remoto no se logro abrir.")
-                Functions.cerrar_driver_navegador(self)
-        except MaxRetryError:
-                print(u'Error: No se logro abrir la instancia del navegador remoto.')
-                raise ValueError(f"Error: Instancia del Navegador Remoto no se logro abrir.")
-                Functions.cerrar_driver_navegador(self)
-            
-    def _create_firefox_sel_grid_docker_driver(self, grid_url):
-        try:
-            options = OpcionesFirefox()
-            options.add_argument('--window-size=1200,1200')# Maximiza la ventana
-            #options.add_argument("inprivate")
-            #options.add_argument("headless")
-            self.driver = webdriver.Remote(grid_url,options=options)
-            return self.driver
-        except NewConnectionError:
-                print(u'Error: No se logro abrir la instancia del navegador remoto.')
-                raise ValueError(f"Error: Instancia del Navegador Remoto no se logro abrir.")
-                Functions.cerrar_driver_navegador(self)
-        except MaxRetryError:
-                print(u'Error: No se logro abrir la instancia del navegador remoto.')
-                raise ValueError(f"Error: Instancia del Navegador Remoto no se logro abrir.")
-                Functions.cerrar_driver_navegador(self)
-
+    
     #Cerrar la instancia del navegador
     def cerrar_driver_navegador(self):
         if self.driver:
