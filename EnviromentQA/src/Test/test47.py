@@ -6,10 +6,10 @@ from src.Function.Inicializar import Inicializar
 class Test(unittest.TestCase):
 
     def setUp(self):
-        Selenium.obtener_archivo_json(self, 'Localizadores_Spotify')
+        Selenium.obtener_archivo_json(self, 'Localizadores_Mercado_Libre')
         Selenium.abrir_navegador(self,"Chrome")
         self.functions = Selenium() 
-        self.functions.configurar_entorno_grabacion()
+        #self.functions.configurar_entorno_grabacion()
 
     def Test_01(self):
         for Nav_Sel_Grid in Inicializar.Navegadores_Sel_Grid:
@@ -21,12 +21,21 @@ class Test(unittest.TestCase):
             Selenium.WebdriverWait(self,2)
             Selenium.cerrar_driver_navegador(self)
         
-    def test_02(self): 
+    def Test_02(self): 
         Selenium.get_url_driver(self,"https://demoqa.com/alerts")
         Selenium.WebdriverWait(self,2)
         Selenium.click_en_elemento(self, "btn-time")
         Selenium.esperar_elemento(self, 5)
         Selenium.alert_navegadores(self,1,"This alert appeared after 5 seconds","No se muestra el mensaje correcto")
+        Selenium.esperar_elemento(self, 5)
+
+    def test_08(self):
+        Selenium.get_url_driver(self,"https://www.google.com/")
+        Selenium.Click_Element(self, "Google","txt_busqueda_google")
+        Selenium.esperar_elemento(self, 5)
+        Selenium.SendKeys(self, "Google","txt_busqueda_google", "Selenium")
+        Selenium.Clear_Element(self, "Google","txt_busqueda_google")
+        Selenium.SendKeys(self, "Google","txt_busqueda_google", "Selenium 2")
         Selenium.esperar_elemento(self, 5)
 
     def Test_03(self):
@@ -90,7 +99,7 @@ class Test(unittest.TestCase):
         #Selenium.Mover_Mouse(self, "Home", "Busqueda_Mercado_Libre", "Home", "Busqueda_Mercado_Libre")
 
     def tearDown(self):
-        self.functions.detener_grabacion()      
+        #self.functions.detener_grabacion()      
         Selenium.cerrar_driver_navegador(self)
 
 if __name__ == "__main__":
