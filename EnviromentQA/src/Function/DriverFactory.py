@@ -17,44 +17,47 @@ from webdriver_manager.microsoft import EdgeChromiumDriverManager
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 
 class DriverFactory():
-    def __init__(self,navegador=Inicializar.Navegador, remote: bool = False, capabilities: bool = False, URL_Sel_Grid = Inicializar.URL_SeleniumGrid):
-        self.Navegador = navegador.lower()
+    
+    def __init__(self, navegador=Inicializar.Navegador, remote: bool = False, capabilities: bool = False, URL_Sel_Grid = Inicializar.URL_SeleniumGrid, PortSelGrid = Inicializar.PortSelGrid):
+        self.Navegador = navegador
         self.Remote = remote #Si es un llamado por Selenium Grid o no
         self.Capabilities = capabilities #Si es llamado por Selenium Grid, se configuran las capabilities o no
         self.Grid_URL = URL_Sel_Grid # URL del llamado a Selenium Grid
+        self.PortSelGrid = PortSelGrid # Puerto del llamado a Selenium Grid
         self.driver = None
 
     #Retorna el Driver de la instancia del navegador a utilizar en las pruebas.
     def get_driver(self):
-        if self.driver is None:
-            self.driver = self._create_driver(self.Navegador, self.Remote, self.Capabilities, self.Grid_URL)
-        return self.driver
+        if self.driver is None:        
+            self.driver = self._create_driver(self.Navegador, self.Remote, self.Capabilities, self.Grid_URL, self.PortSelGrid)
+            return self.driver
     
      #Crear y configurar el driver: local o remoto
-    def _create_driver(self, browser: str, remote: bool, capabilities: bool, grid_url: str):       
+    def _create_driver(self, browser: str, remote: bool, capabilities: bool, grid_url: str, port: int):       
         if remote:  #Instancia remota en Selenium Grid
             if capabilities:
                 capabilities_nav = self._get_remote_capabilities(browser)
-                driver = self._create_remote_driver(capabilities_nav, grid_url)
+                self.driver = self._create_remote_driver(capabilities_nav, grid_url)
             else:
                 if browser == "Chrome_Remote":
-                    driver = self._create_chrome_remote_driver(grid_url)
+                    self.driver = self._create_chrome_remote_driver(grid_url)
                 elif browser == "Edge_Remote":
-                    driver = self._create_edge_remote_driver(grid_url)
-            return driver
+                    self.driver = self._create_edge_remote_driver(grid_url)
+                elif browser == "Firefox_Remote":
+                    self.driver = self._create_firefox_remote_driver(grid_url)
         else:  #Instancia Navegador Local
             if browser == "Chrome":
                 self.driver = self._create_chrome_driver()
                 return self.driver
             elif browser == "Firefox":
-                driver = self._create_firefox_driver()
+                self.driver = self._create_firefox_driver()
                 return self.driver
             elif browser == "Edge":
                 driver = self._create_edge_driver()
                 return self.driver
             else:
                 raise ValueError(f"Navegador {browser} no soportado.")
-    
+        return self.driver
     #Crea y configura el driver de Chrome usando webdriver-manager
     def _create_chrome_driver(self):
         options = OpcionesChrome()
@@ -72,23 +75,36 @@ class DriverFactory():
         options.add_argument("--disable-extensions")#Deshabilita extensiones innecesarias
         
         chrome_driver_path = ChromeDriverManager().install() #Usa webdriver-manager para obtener la última versión compatible
-        driver = webdriver.Chrome(service=ChromeService(chrome_driver_path), options=options)
-        return driver
+        self.driver = webdriver.Chrome(service=ChromeService(chrome_driver_path), options=options)
+        print(self.driver)
+        return self.driver
     
     #Crea y configura el driver de Firefox usando webdriver-manager
     def _create_firefox_driver(self):
-        options = OpcionesFirefox()
-        options.add_argument('--window-size=800,800')  # Maximiza la ventana
-        driver = webdriver.Firefox(service = FirefoxService(GeckoDriverManager().install()),options=options) #Usa webdriver-manager para obtener la última versión compatible
-        return driver
+        try:
+            options = OpcionesFirefox()
+            options.add_argument('--window-size=1200,1200')# Maximiza la ventana
+            self.driver = webdriver.Firefox(service = FirefoxService(GeckoDriverManager().install()),options=options) #Usa webdriver-manager para obtener la última versión compatible
+            return self.driver
+        except WebDriverException:
+                print(u'No se abrio la instancia del navegador Local')
+                Functions.cerrar_driver_navegador(self)
+        except NewConnectionError:
+                print(u'Error: No se logro abrir la instancia del navegador remoto.')
+                raise ValueError(f"Error: Instancia del Navegador Remoto no se logro abrir.")
+                Functions.cerrar_driver_navegador(self)
+        except MaxRetryError:
+                print(u'Error: No se logro abrir la instancia del navegador remoto.')
+                raise ValueError(f"Error: Instancia del Navegador Remoto no se logro abrir.")
+                Functions.cerrar_driver_navegador(self)
     
     #Crea y configura el driver de Edge de manera local usando webdriver-manager
     def _create_edge_driver(self):
         options = OpcionesEdge()
         options.add_argument("--start-maximized")
-        driver = webdriver.Edge(service =EdgeService(EdgeChromiumDriverManager().install()),options=options)
-        #driver.maximize_window()
-        return driver
+        self.driver = webdriver.Edge(service =EdgeService(EdgeChromiumDriverManager().install()),options=options)
+        #self.driver.maximize_window()
+        return self.driver
     
     #Crea y configura el driver de Chrome Remote de Selenium Grid
     def _create_chrome_remote_driver(self, grid_url : str):
@@ -100,9 +116,8 @@ class DriverFactory():
         }
         options.add_experimental_option("prefs",prefs)
         options.add_argument('start-maximized')
-        
-        driver = webdriver.Remote(grid_url,options=options)
-        return driver 
+        self.driver = webdriver.Remote(grid_url,options=options)
+        return self.driver 
     
     #Crea y configura el driver de Edge Remote de Selenium Grid
     def _create_edge_remote_driver(self, grid_url : str):
@@ -110,21 +125,29 @@ class DriverFactory():
         options.add_argument("start-maximized")
         options.add_argument("inprivate")
         #options.add_argument("headless")
+        self.driver = webdriver.Remote(grid_url,options=options)
+        return self.driver
     
-        driver = webdriver.Remote(grid_url,options=options)
-        return driver
+    #Crea y configura el driver de Firefox Remote de Selenium Grid
+    def _create_firefox_remote_driver(self, grid_url : str):
+        options = OpcionesFirefox();
+        options.add_argument("start-maximized")
+        options.add_argument("inprivate")
+        #options.add_argument("headless")
+        self.driver = webdriver.Remote(grid_url,options=options)
+        return self.driver
     
     #Devuelve las capacidades del navegador para la conexión remota en Selenium Grid
     def _get_remote_capabilities(self, browser: str):
-        if browser == "chrome":
+        if browser == "Chrome":
             capabilities = DesiredCapabilities.CHROME.copy()
-            capabilities['browserName'] = 'chrome'
+            capabilities['browserName'] = 'Chrome'
             capabilities['platform'] = 'ANY'  # Puede ser Windows, Linux, etc.
-        elif browser == "firefox":
+        elif browser == "Firefox":
             capabilities = DesiredCapabilities.FIREFOX.copy()
-            capabilities['browserName'] = 'firefox'
+            capabilities['browserName'] = 'Firefox'
             capabilities['platform'] = 'ANY'
-        elif browser == "edge":
+        elif browser == "Edge":
             capabilities = DesiredCapabilities.EDGE.copy()
             capabilities['browserName'] = 'MicrosoftEdge'
             capabilities['platform'] = 'ANY'
