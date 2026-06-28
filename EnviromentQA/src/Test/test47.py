@@ -32,11 +32,16 @@ class Test(unittest.TestCase):
     def test_08(self):
         Selenium.get_url_driver(self,"https://www.google.com/")
         Selenium.Click_Element(self, "Google","txt_busqueda_google")
-        Selenium.esperar_elemento(self, 5)
+        Selenium.esperar_elemento(self, 3)
         Selenium.SendKeys(self, "Google","txt_busqueda_google", "Selenium")
         Selenium.Clear_Element(self, "Google","txt_busqueda_google")
-        Selenium.SendKeys(self, "Google","txt_busqueda_google", "Selenium 2")
-        Selenium.esperar_elemento(self, 5)
+        Selenium.Scroll_Element_JS(self, "Google","txt_busqueda_google")
+        Selenium.SendKeys(self, "Google","txt_busqueda_google", "Selenium 2") 
+        Selenium.Double_Click(self, "Google","txt_busqueda_google")
+        Selenium.Click_Derecho(self, "Google","txt_busqueda_google")
+        Selenium.Explicit_Wait_Element(self, "Google","txt_busqueda_google", 15)
+        Selenium.Move_Element(self, "Google","txt_busqueda_google")
+        Selenium.esperar_elemento(self, 3)
 
     def Test_03(self):
         for Nav_Sel_Grid in Inicializar.Navegadores_Sel_Grid:

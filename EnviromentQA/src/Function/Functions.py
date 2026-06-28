@@ -64,6 +64,16 @@ class Functions(Inicializar):
     
     Nav_utilizado_capturas = ""
     
+    BY = {
+        "ID": By.ID,
+        "NAME": By.NAME,
+        "XPATH": By.XPATH,
+        "CSS": By.CSS_SELECTOR,
+        "CLASS": By.CLASS_NAME,
+        "LINK": By.LINK_TEXT,
+        "TAG": By.TAG_NAME
+    }
+
     #Abrir Navegador
     def abrir_navegador(self,navegador=Inicializar.Navegador, Remote = False, URL_SeleniumGrid = Inicializar.URL_SeleniumGrid,PortSelGrid=Inicializar.PortSelGrid):
         print(u"Directorio Base:" + Inicializar.BaseDir)
@@ -329,80 +339,8 @@ class Functions(Inicializar):
     def get_url_driver(self,URL):
         return self.driver.get(URL)
     
-    #Metodo para encontrar elementos en el DOM
-    def encontrando_elementos_en_el_DOM(self,estrategia_busqueda, valor_busqueda):
-        try:
-            if estrategia_busqueda == "XPATH":
-                elemento = self.driver.find_element(By.XPATH, valor_busqueda)
-                print(u'ID_Elements: Se esta interactuando con el elemento: ' + valor_busqueda)
-            elif estrategia_busqueda == "NAME":
-                elemento = self.driver.find_element(By.NAME, valor_busqueda)
-                print(u'ID_Elements: Se esta interactuando con el elemento: ' + valor_busqueda)
-            elif estrategia_busqueda == "ID":
-                elemento = self.driver.find_element(By.ID, valor_busqueda)
-                print(u'ID_Elements: Se esta interactuando con el elemento: ' + valor_busqueda)
-            else:
-                raise ValueError(f"Estrategia de busqueda {estrategia_busqueda} con el valor {valor_busqueda} no se encuentra soportada.")
-            
-            return elemento
-            
-        except TimeoutException:
-            print(u'El elemento esperado no se presento: ' + valor_busqueda)
-            Functions.cerrar_driver_navegador(self)
-            
-        except NoSuchElementException:
-            print(u'El elemento esperado no se encuentro: ' + valor_busqueda)
-            Functions.cerrar_driver_navegador(self)
+        #Obtener Archivo JSON con los localizadores por medio del nombre      
     
-    #Metodo para encontrar elementos en el DOM
-    def encontrando_elementos_en_el_DOM_con_tiempo_espera(self,estrategia_busqueda, valor_busqueda, tiempo_espera):
-        try:
-            if estrategia_busqueda == "XPATH":
-                wait = WebDriverWait(self.driver,tiempo_espera)
-                print(u'Esperando que el elemento se visualice: ' + valor_busqueda)
-                wait.until(EC.visibility_of_element_located((By.XPATH,valor_busqueda)))
-                wait.until(EC.element_to_be_clickable((By.XPATH,valor_busqueda)))
-                                
-                elemento = self.driver.find_element(By.XPATH, valor_busqueda)
-                print('uElemento Encontrado:' + valor_busqueda)
-                print(u'ID_Elements: Se esta interactuando con el elemento: ' + valor_busqueda)
-            
-            elif estrategia_busqueda == "NAME":
-                wait = WebDriverWait(self.driver,tiempo_espera)
-                print(u'Esperando que el elemento se visualice: ' + valor_busqueda)
-                wait.until(EC.visibility_of_element_located((By.NAME,valor_busqueda)))
-                wait.until(EC.element_to_be_clickable((By.NAME,valor_busqueda)))
-                
-                elemento = self.driver.find_element(By.NAME, valor_busqueda)
-                print('uElemento Encontrado:' + valor_busqueda)
-                print(u'ID_Elements: Se esta interactuando con el elemento: ' + valor_busqueda)
-            
-            elif estrategia_busqueda == "ID":
-                wait = WebDriverWait(self.driver,tiempo_espera)
-                print(u'Esperando que el elemento se visualice: ' + valor_busqueda)
-                wait.until(EC.visibility_of_element_located((By.ID,valor_busqueda)))
-                wait.until(EC.element_to_be_clickable((By.ID,valor_busqueda)))
-
-                elemento = self.driver.find_element(By.ID, valor_busqueda)
-                print('uElemento Encontrado:' + valor_busqueda)
-                print(u'ID_Elements: Se esta interactuando con el elemento: ' + valor_busqueda)
-            
-            else:
-                raise ValueError(f"Estrategia de busqueda {estrategia_busqueda} con el valor {valor_busqueda} no se encuentra soportada.")
-            
-            return elemento
-        except TimeoutException:
-            print(u'El elemento esperado no se presento: ' + valor_busqueda)
-            Functions.cerrar_driver_navegador(self)
-            
-        except NoSuchElementException:
-            print(u'El elemento esperado no se encuentro: ' + valor_busqueda)
-            Functions.cerrar_driver_navegador(self)
-        except UnexpectedAlertPresentException:
-            print(u'No se presento la alerta: ' + valor_busqueda)
-            Functions.cerrar_driver_navegador(self)
-    
-    #Obtener Archivo JSON con los localizadores por medio del nombre      
     def obtener_archivo_json(self,file):
         json_ruta = Inicializar.Json + "/"+file+'.json'
         try:
@@ -415,6 +353,19 @@ class Functions(Inicializar):
         except FileNotFoundError:
             self.json_strings =False
             pytest.skip(u'Obtener Archivo Json: No se encontro el archivo json' + file)
+            Functions.cerrar_driver_navegador(self)
+
+    #Metodo para encontrar elementos en el DOM
+    def Find_Element_On_DOM(self,estrategia_busqueda, valor_busqueda):
+        try:
+            elemento = self.driver.find_element(Functions.BY[estrategia_busqueda.upper()], valor_busqueda)
+            print(u'Find Element: Se esta interactuando con el elemento ' + valor_busqueda)
+            return elemento
+        except TimeoutException:
+            print(u'El elemento esperado no se encontro: ' + valor_busqueda)
+            Functions.cerrar_driver_navegador(self)
+        except NoSuchElementException:
+            print(u'El elemento esperado no se encontro: ' + valor_busqueda)
             Functions.cerrar_driver_navegador(self)
      
     #Obtener entidad de elemento en el archivo JSON       
@@ -439,68 +390,55 @@ class Functions(Inicializar):
             print(u'No se encontro el valor de la entidad buscada en el archivo .Json')
         else:
             try:
-                elemento = Functions.encontrando_elementos_en_el_DOM(self, GetEntity["GetFieldBy"].upper(), GetEntity["ValueToFind"]) 
-                print(u'Obtener Elemento: se encontro el elemento, ' + GetEntity["ValueToFind"])
+                elemento = Functions.Find_Element_On_DOM(self, GetEntity["GetFieldBy"].upper(), GetEntity["ValueToFind"]) 
+                print(u'Obtener Elemento: se encontro el elemento: ' + GetEntity["GetFieldBy"] + ' con el valor: ' + GetEntity["ValueToFind"])
                 return elemento
             except NoSuchElementException:
-                print(u'Obtener Elemento: no se encontro el elemento ' + GetEntity["ValueToFind"])
+                print(u'Obtener Elemento: no se encontro el elemento ' + GetEntity["GetFieldBy"] + ' con el valor: ' + GetEntity["ValueToFind"])
                 Functions.cerrar_driver_navegador(self)
             except TimeoutException:
-                print(u'Obtener Elemento: no se encontro el elemento ' + GetEntity["ValueToFind"])
+                print(u'Obtener Elemento: no se encontro el elemento ' + GetEntity["GetFieldBy"] + ' con el valor: ' + GetEntity["ValueToFind"])
                 Functions.cerrar_driver_navegador(self)          
     
     # Método para obtener el texto de un elemento a partir de la entidad del archivo JSON
     def Get_Text(self,page, elemento):
-        GetEntity = Functions.Get_Entity(self, page, elemento)
-        if GetEntity is None:
-            print(u'No se encontro el valor de la entidad buscada en el archivo .Json')
-        else:
-            try:
-                elemento = Functions.encontrando_elementos_en_el_DOM(self, GetEntity["GetFieldBy"].upper(), GetEntity["ValueToFind"])   
-                print(u'Obtener texto, se encontro el elemento: ' + GetEntity["ValueToFind"])
-                print(u'Text Value:' + elemento.text)
-                return elemento.text
-            except NoSuchElementException:
-                print(u'Obtener Texto, No se encontro el elemento' + GetEntity["ValueToFind"])
-                Functions.cerrar_driver_navegador(self)
-            except TimeoutException:
-                print(u'Obtener Texto, No se encontro el elemento' + GetEntity["ValueToFind"])
-                Functions.cerrar_driver_navegador()
+        GetEntity = Functions.Get_Element(self, page, elemento)
+        try:
+            print(u'Obtener Texto: Texto en el elemento ' + str(elemento))
+            return GetEntity.text
+        except NoSuchElementException:
+            print(u'Obtener Texto: No se logro obtener el texto del elemento ' + str(elemento))
+            Functions.cerrar_driver_navegador(self)
+        except TimeoutException:
+            print(u'Obtener Texto: No se logro obtener el texto del elemento ' + str(elemento))
+            Functions.cerrar_driver_navegador()
 
     # Método para hacer click en un elemento a partir de la entidad del archivo JSON 
     def Click_Element(self,page, elemento):
-        GetEntity = Functions.Get_Entity(self, page, elemento)
-        if GetEntity is None:
-            print(u'No se encontro el valor de la entidad buscada en el archivo .Json')
-        else:
-            try:
-                elemento = Functions.encontrando_elementos_en_el_DOM(self, GetEntity["GetFieldBy"].upper(), GetEntity["ValueToFind"])    
-                print(u'Elemento click en: '+ GetEntity["ValueToFind"])
-                return elemento.click()
-            except NoSuchElementException:
-                print(u'Elemento click, no se encontro el elemento: ' + GetEntity["ValueToFind"])
-                Functions.cerrar_driver_navegador(self)
-            except TimeoutException:
-                print(u'Elemento click, no se encontro el elemento: ' + GetEntity["ValueToFind"])
-                Functions.cerrar_driver_navegador(self)
+        GetEntity = Functions.Get_Element(self, page, elemento)
+        try:
+            print(u'Se realizo click en el elemento ' + str(elemento))
+            return GetEntity.click()
+        except NoSuchElementException:
+            print(u'Elemento click: no se encontro el elemento ' + str(elemento) + u' para hacer click')
+            Functions.cerrar_driver_navegador(self)
+        except TimeoutException:
+            print(u'Elemento click, no se encontro el elemento ' + str(elemento) + u' para hacer click')
+            Functions.cerrar_driver_navegador(self)
     
     # Método para enviar texto a un elemento a partir de la entidad del archivo JSON
     def SendKeys(self,page,elemento,texto):
-        GetEntity = Functions.Get_Entity(self, page, elemento)
-        if GetEntity is None:
-            print(u'No se encontro la entidad buscada: ' + str(page) + ' con el elemento: ' + str(elemento) + ' en el archivo .Json')
-        else:
-            try:
-                elemento = Functions.encontrando_elementos_en_el_DOM(self, GetEntity["GetFieldBy"].upper(), GetEntity["ValueToFind"])
-                print(f'Escribir texto en:  {GetEntity["ValueToFind"]} con el texto: {texto}')
-                return elemento.send_keys(texto)
-            except NoSuchElementException:
-                print(u'Escribir Texto: No se encontro el elemento ' + GetEntity["ValueToFind"])
-                Functions.cerrar_driver_navegador()
-                
-            except TimeoutException:
-                print(u'Escribir Texto: No se encontro el elemento ' + GetEntity["ValueToFind"])
-                Functions.cerrar_driver_navegador()
+        GetEntity = Functions.Get_Element(self, page, elemento)
+        try:
+            print(f'Escribir texto: se escribio el texto {texto} en el elemento {elemento}')
+            return GetEntity.send_keys(texto)
+        except NoSuchElementException:
+            print(u'Escribir Texto: No se encontro el elemento ' + str(elemento) + u' para escrbir el valor: {texto}')
+            Functions.cerrar_driver_navegador()
+            
+        except TimeoutException:
+            print(u'Escribir Texto: No se encontro el elemento ' + str(elemento) + u' para escribir el valor: {texto}')
+            Functions.cerrar_driver_navegador()
     
     # Método para enviar teclas específicas a un elemento a partir de la entidad del archivo JSON
     def Send_Keys_Specific(self,page,elemento,key):
@@ -521,20 +459,16 @@ class Functions(Inicializar):
 
     # Método para limpiar el texto de un elemento a partir de la entidad del archivo JSON
     def Clear_Element(self,page, elemento):  
-        GetEntity = Functions.Get_Entity(self, page, elemento)
-        if GetEntity is None:
-            print(u'No se encontro el valor de la entidad buscada en el archivo .Json')
-        else:
-            try:
-                elemento = Functions.encontrando_elementos_en_el_DOM(self, GetEntity["GetFieldBy"].upper(), GetEntity["ValueToFind"])  
-                print(u'Se limpio el texto en el elemento: ' + str(page) + ' con el valor: ' + GetEntity["ValueToFind"])
-                return elemento.clear()
-            except NoSuchElementException:
-                print(u'Limpiar Elemento: no se encontro el elemento ' + GetEntity["ValueToFind"] + ' de ' + str(page))
-                Functions.cerrar_driver_navegador(self)   
-            except TimeoutException:
-                print(u'Limpiar Elemento: no se encontro el elemento ' + GetEntity["ValueToFind"] + ' de ' + str(page))
-                Functions.cerrar_driver_navegador(self)
+        GetEntity = Functions.Get_Element(self, page, elemento)
+        try:
+            print(u'Limpiar Elemento: Se limpio el elemento ' + str(elemento))
+            return GetEntity.clear()
+        except NoSuchElementException:
+            print(u'Limpiar Elemento: no se logro limpiar el elemento ' + str(elemento))
+            Functions.cerrar_driver_navegador(self)   
+        except TimeoutException:
+            print(u'Limpiar Elemento: no se logro limpiar el elemento ' + str(elemento))
+            Functions.cerrar_driver_navegador(self)
 
     # Método para obtener un elemento select a partir de la entidad del archivo JSON
     def Get_Element_Select(self,page, elemento):
@@ -543,20 +477,9 @@ class Functions(Inicializar):
             print(u'No se encontro el valor de la entidad buscada en el archivo .Json')
         else:
             try:
-                if  GetEntity["GetFieldBy"].lower()== "id":
-                    select = Select(self.driver.find_element(By.ID,GetEntity["ValueToFind"]))
-                    print(u"get elements: " + GetEntity["ValueToFind"]) 
-                if GetEntity["GetFieldBy"].lower() == "name":
-                    select = Select(self.driver.find_element(By.NAME,GetEntity["ValueToFind"]))
-                    print(u"get elements: " + GetEntity["ValueToFind"])         
-                if GetEntity["GetFieldBy"].lower() == "xpath":
-                    select = Select(self.driver.find_element(By.XPATH,GetEntity["ValueToFind"]))
-                    print(u"get elements: " + GetEntity["ValueToFind"])
-                if GetEntity["GetFieldBy"].lower() == "link":
-                    select = Select(self.driver.find_element(By.LINK_TEXT,GetEntity["ValueToFind"]))
-                    print(u"get elements: " + GetEntity["ValueToFind"])
+                select = Select(self.driver.find_element(Functions.BY[GetEntity["GetFieldBy"].upper()],GetEntity["ValueToFind"]))
+                print(u"get elements: " + GetEntity["ValueToFind"]) 
                 return select
-            
             except NoSuchElementException:
                 print(u"Select_Element: No presente " + GetEntity["ValueToFind"])
                 Functions.cerrar_driver_navegador(self) 
@@ -564,31 +487,23 @@ class Functions(Inicializar):
                 print(u"Select_Element: No presente " + GetEntity["ValueToFind"])
                 Functions.cerrar_driver_navegador(self)
 
+    # Método para seleccionar un elemento de un select por su texto visible a partir de la entidad del archivo JSON  
+    def obtener_elemento_select_texto(self,page, elemento, texto):
+        select = Functions.Get_Element_Select(self, page, elemento)
+        select.select_by_visible_text(texto)
+    
     # Método para esperar explícitamente a que un elemento sea visible y clickeable a partir de la entidad del archivo JSON          
-    def Explicit_Wait_Element(self, page, elemento):  
+    def Explicit_Wait_Element(self, page, elemento, tiempo_espera):  
         GetEntity = Functions.Get_Entity(self, page, elemento)
         if GetEntity is None:
             print(u'No se encontro el valor de la entidad buscada en el archivo .Json')
         else:
             try:
-                if GetEntity["GetFieldBy"].lower() == 'id':
-                    wait =WebDriverWait(self.driver,15)
-                    wait.until(EC.visibility_of_element_located((By.ID,GetEntity["ValueToFind"])))
-                    wait.until(EC.element_to_be_clickable((By.ID,GetEntity["ValueToFind"])))   
-                    print(u'Espera explicita: se visualizo el elemento ' + str(page) + ' con el valor ' + GetEntity["ValueToFind"])
-                    return True
-                if GetEntity["GetFieldBy"].lower() == 'xpath':
-                    wait =WebDriverWait(self.driver,15)
-                    wait.until(EC.visibility_of_element_located((By.XPATH,GetEntity["ValueToFind"])))
-                    wait.until(EC.element_to_be_clickable((By.XPATH,GetEntity["ValueToFind"])))   
-                    print(u'Espera explicita: se visualizo el elemento ' + str(page) + ' con el valor ' + GetEntity["ValueToFind"])
-                    return True
-                if GetEntity["GetFieldBy"].lower() == 'name':
-                    wait =WebDriverWait(self.driver,15)
-                    wait.until(EC.visibility_of_element_located((By.NAME,GetEntity["ValueToFind"])))
-                    wait.until(EC.element_to_be_clickable((By.NAME,GetEntity["ValueToFind"])))   
-                    print(u'Espera explicita: se visualizo el elemento ' + str(page) + ' con el valor ' + GetEntity["ValueToFind"])
-                    return True         
+                wait =WebDriverWait(self.driver,tiempo_espera)
+                wait.until(EC.visibility_of_element_located((Functions.BY[GetEntity["GetFieldBy"].upper()],GetEntity["ValueToFind"])))
+                wait.until(EC.element_to_be_clickable((Functions.BY[GetEntity["GetFieldBy"].upper()],GetEntity["ValueToFind"])))   
+                print(u'Espera explicita: se visualizo el elemento ' + str(page) + ' con el valor ' + GetEntity["ValueToFind"])
+                return True
             except NoSuchElementException:
                 print(u'Esperar explicita: no se encontro o no se visualizo el elemento luego de la espera ' + str(page) + ' con el valor ' + GetEntity["ValueToFind"])
                 Functions.cerrar_driver_navegador()
@@ -598,72 +513,57 @@ class Functions(Inicializar):
 
     # Método para realizar scroll hasta un elemento a partir de la entidad del archivo JSON
     def Scroll_Element_JS(self, page, elemento):
-        GetEntity = Functions.Get_Entity(self, page, elemento)
-        if GetEntity is None:
-            print(u'No se encontro el valor de la entidad buscada en el archivo .Json')
-        else:
-            try: 
-                if GetEntity["GetFieldBy"].lower() == 'id':
-                    entidad = self.driver.find_element(By.ID, GetEntity["ValueToFind"])
-                    self.driver.execute_script("arguments[0].scrollIntoView();", entidad)
-                    print(u'Se hizo scroll_to hasta el elemento')
-                    return True
-                if GetEntity["GetFieldBy"].lower() == 'name':
-                    entidad = self.driver.find_element(By.NAME, GetEntity["ValueToFind"])
-                    self.driver.execute_script("arguments[0].scrollIntoView();", entidad)
-                    print(u'Se hizo scroll_to hasta el elemento')
-                    return True
-                if GetEntity["GetFieldBy"].lower() == 'xpath':
-                    entidad = self.driver.find_element(By.XPATH, GetEntity["ValueToFind"])
-                    self.driver.execute_script("arguments[0].scrollIntoView();", entidad)
-                    print(u'Se hizo scroll_to hasta el elemento')
-                    return True
-                if GetEntity["GetFieldBy"].lower() == 'class':
-                    entidad = self.driver.find_element(By.CLASS_NAME, GetEntity["ValueToFind"])
-                    self.driver.execute_script("arguments[0].scrollIntoView();", entidad)
-                    print(u'Se hizo scroll_to hasta el elemento')
-                    return True
-            except TimeoutException:
-                print(u'JS Scroll: No se logro realizar hacia el elemento')
-                Functions.cerrar_driver_navegador(self)
-
-    # Método para seleccionar un elemento de un select por su texto visible a partir de la entidad del archivo JSON  
-    def obtener_elemento_select_texto(self,page, elemento, texto):
-        select = Functions.Get_Element_Select(self, page, elemento)
-        select.select_by_visible_text(texto)
+        GetEntity = Functions.Get_Element(self, page, elemento)
+        try: 
+            self.driver.execute_script("arguments[0].scrollIntoView();", GetEntity)
+            print(u'JS Scroll: Se realizo scroll_to hasta el elemento ' + str(page) + ' con el valor ' + elemento)
+            return True
+        except TimeoutException:
+            print(u'JS Scroll: No se logro realizar hacia el elemento ' + str(page) + ' con el valor ' + elemento)
+            Functions.cerrar_driver_navegador(self)
 
     # Método para hacer doble click en un elemento a partir de la entidad del archivo JSON
     def Double_Click(self, page, elemento):
         action =ActionChains(self.driver)
-        elemento = Functions.obtener_elemento(self, page, elemento)
-        
+        element = Functions.Get_Element(self, page, elemento)
         try:
-            #hacer doble click
-            action.double_click(elemento).perform()
-            print(f'Double Click: se realizo la accion, ' + elemento["ValueToFind"])
+            action.double_click(element).perform()
+            print(f'Double Click: se realizo doble click en el elemento ' + str(page) + ' con el valor ' + str(elemento))
 
         except NoSuchElementException:
-            print(u'Double Click: no se logro realizar la accion, ' + elemento["ValueToFind"])
+            print(u'Double Click: no se logro realizar doble click en el elemento ' + str(page) + ' con el valor ' + str(elemento))
             Functions.cerrar_driver_navegador(self)
         except TimeoutException:
-            print(u'Double Click: no se logro realizar la accion, ' + elemento["ValueToFind"])
+            print(u'Double Click: no se logro realizar doble click en el elemento ' + str(page) + ' con el valor ' + str(elemento))
             Functions.cerrar_driver_navegador(self)
 
     # Método para hacer click derecho en un elemento a partir de la entidad del archivo JSON    
     def Click_Derecho(self,page, elemento):
         action =ActionChains(self.driver)
-        elemento = Functions.obtener_elemento(self, page, elemento)
-        
+        element = Functions.Get_Element(self, page, elemento)
         try:
-            #Click Derecho
-            action.context_click(elemento).perform()
-            print(f'Click Derecho: se realizo la accion, ' + elemento["ValueToFind"])
+            action.context_click(element).perform()
+            print(f'Click Derecho: se realizo click derecho en el elemento ' + str(page) + ' con el valor ' + str(elemento))
         except NoSuchElementException:
-            print(u'Click Derecho: no se logro realizar la accion, ' + elemento["ValueToFind"])
+            print(u'Click Derecho: no se logro realizar click derecho en el elemento ' + str(page) + ' con el valor ' + str(elemento))
             Functions.cerrar_driver_navegador(self)
         except TimeoutException:
-            print(u'Click Derecho: no se logro realizar la accion, ' + elemento["ValueToFind"])
+            print(u'Click Derecho: no se logro realizar click derecho en el elemento ' + str(page) + ' con el valor ' + str(elemento))
             Functions.cerrar_driver_navegador(self)
+
+    # Método para mover el mouse a un elemento a partir de la entidad del archivo JSON
+    def Move_Element(self,page, elemento):
+        action = ActionChains(self.driver)
+        element = Functions.Get_Element(self, page, elemento)
+        try:
+            action.move_to_element(element).perform()
+            print(f'Mover Mouse: se movio el mouse al elemento ' + str(page) + ' con el valor ' + str(elemento))
+        except NoSuchElementException:
+            print(u'Mover_mouse: no se encontro el elemento ' + str(page) + ' con el valor ' + str(elemento))
+            Functions.cerrar_driver_navegador(self)
+        except TimeoutException:
+            print(u'Mover_mouse: no se encontro el elemento ' + str(page) + ' con el valor ' + str(elemento))
+            Functions.cerrar_driver_navegador(self)  
 
     #Espera informal
     def esperar_elemento(self,tiempo_espera = Inicializar.Tiempo_Espera):
@@ -909,23 +809,6 @@ class Functions(Inicializar):
         return self.assertTrue(elemento.is_displayed()==True,msj)
     def Assert_In_Elemento(self,texto_contenido, texto_ingresado_alert):
         return self.assertIn(texto_contenido, f'{texto_ingresado_alert}')
-    
-    #Mover Mouse en aplicativo web
-    def Mover_Mouse_x_App_Web(self,*entidad):
-        action = ActionChains(self.driver)
-        elemento = Functions.obtener_elemento(self, *entidad)
-        
-        try:
-            action.move_to_element(elemento).perform()
-            print(f'Mover Mouse: se movio el mouse al elemento ' + self.json_ValueToFind)
-            return elemento
-        
-        except NoSuchElementException:
-            print(u'Mover_mouse: no se encontro el elemento ' + self.json_ValueToFind)
-            Functions.cerrar_driver_navegador(self)
-        except TimeoutException:
-            print(u'Mover_mouse: no se encontro el elemento ' + self.json_ValueToFind)
-            Functions.cerrar_driver_navegador(self)  
 
     #Arrastrar y Soltar: Drag & Drop
     def Arrastrar_y_Soltar(self,elemento_drag, elemento_drop):
