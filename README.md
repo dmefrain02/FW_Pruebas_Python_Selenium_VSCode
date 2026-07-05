@@ -22,7 +22,7 @@ Este es un Framework de Automatización de pruebas web con **Python** y **Seleni
 18. [Versión del Framework](#Versión)
 
 # Descripción
-En este framework se proporciona una base organizada para automatizar pruebas web con Selenium y Python. Utilizando buenas prácticas tales como: Page Object Model, manejo automático de versiones de los navegadores, posibilidad de utilizar contenedores Docker con Tecnologia VNC para visualizar las ejecuciones de pruebas, poder escribir/ejecutar pruebas en formato Behave y generacion de distintos tipos de reportes (Allure, Reportes Behave y Reporte Html-TestRunner). Además, permite claridad y reusabilidad, se encuentra diseñado para integrarse en ambientes de testing avanzados (CI, diferentes entornos).
+En este framework se proporciona una base organizada para automatizar pruebas web utilizando Selenium y Python mediante buenas prácticas como: Page Object Model, manejo automático de versiones de los navegadores, posibilidad de utilizar contenedores Docker con Tecnologia VNC para visualizar las ejecuciones de pruebas, escribir/ejecutar pruebas en formato Behave y generacion de distintos tipos de reportes (Allure, Reportes Behave y Reporte Html-TestRunner).
 
 # Motivación
 - Evitar scripts desorganizados y difíciles de mantener.
@@ -32,28 +32,31 @@ En este framework se proporciona una base organizada para automatizar pruebas we
 - Tener integracion con herramientas de CI/CD.
 
 # Arquitectura
-Descripción de alto nivel de cómo está organizado el framework:
+Descripción de alto nivel de cómo se encuentra organizado el framework:
 | Ruta                               | Descripción                                                                                                   |
 |------------------------------------|---------------------------------------------------------------------------------------------------------------|
 | `/src`                             | Carpeta raíz del framework                                                                                    |
-| `/src/Pages`                       | Objetos de página (Page Objects) en archivos JSON                                                             |
-| `/src/Test`                        | Casos de prueba                                                                                               |
-| `/src/Function/Functions.py`       | Funciones Selenium y utilidades del Framework                                                                 |
+| `/src/Pages`                       | Objetos de página (Page Objects) con las acciones de las Pages y de donde se leen los elementos en la paginas |
+|                                    | através de archivos JSON que contienen los localizadores  de los elementos (en proceso de refactorización).   | 
+| `/src/Test`                        | Scripts de Pruebas creados                                                                                    |
+| `/src/Function/Functions.py`       | Funciones Selenium y médotos utilitarios del Framework (en proceso de refactorización).                       |
 | `src/Function/Inicializar.py`      | Configuraciones generales del framework (rutas utilzadas y demás configuraciones)                             |
-| `src/Features`                     | Pruebas escritas en formato Behave (Gherkin)                                                                  |
-| `src/Features/steps`               | Pasos (steps) de pruebas Behave                                                                               |
-| `src/Drivers`                      | WebDrivers de los navegadores                                                                                 |
+| `src/Features`                     | Escenarios de Pruebas escritos en formato Gherkin                                                             |
+| `src/Features/steps`               | Steps de los escenarios de pruebas escritos en formato Gherkin                                                |
+| `src/Drivers`                      | Drivers de los navegadores                                                                                    |
 | `src/Docker`                       | Configuraciones e imágenes Docker para ejecución                                                              |
-| `src/Data/Capturas`                | Capturas de pantalla de pruebas                                                                               |
-| `src/Data/Videos`                  | Grabaciones de pruebas                                                                                        |
+| `src/Data/Capturas`                | Capturas de pantalla tomadas durante las pruebas                                                              |
+| `src/Data/Videos`                  | Grabaciones realizadas durante las pruebas                                                                    |
 | `src/Data`                         | Archivos de datos del framework                                                                               |
-| `src/selenium_grid`                | Configuraciones para ejecución en Selenium Grid local o Docker                                                | 
-| `src/report/reportHtmltestrunner`  | Reportes HtmlTestRunner                                                                                       |
-| `src/report/reports`               | Reportes Allure                                                                                               |
-| `src/report/reportBehave`          | Reportes generados por Behave                                                                                 |
+| `src/selenium_grid`                | Configuraciones para ejecución en Selenium Grid local o en Docker                                             | 
+| `src/reports/Report_HtmlTestRunner`| Reportes HtmlTestRunner                                                                                       |
+| `src/reports/Report_Allure`        | Reportes Allure                                                                                               |
+| `src/reports/Report_Behave`        | Reportes Generados con Behave                                                                                 |
+| `src/Selenium IDE`                 | Scripts de Pruebas Generados con Selenium IDE                                                                 |
 | `src/Archivos a Cargar`            | Archivos utilizados para pruebas                                                                              |
 | `src/Archivos Descargados`         | Archivos descargados durante las pruebas                                                                      |
-| `Page Objects`                     | encapsulan la lógica de interacción con páginas web. En este framework se maneja en archivos en formato JSON. |
+| `src/Localizadores`                | Archivos JSON que contienen los localizadores de los elmentos de las páginas de los scripts de pruebas.       |
+|------------------------------------|---------------------------------------------------------------------------------------------------------------|
 
 # Tecnologías
 - Python
@@ -64,20 +67,20 @@ Descripción de alto nivel de cómo está organizado el framework:
 
 # Requisitos
 1. Python ≥ 3.X  
-2. WebDriver para el navegador que usarás (Chrome, Firefox, etc.) o bien tenerlos instalados para usarlos desde el manejo automatico de versiones de los navegadores (Webdriver-manager) 
+2. WebDrivers de los navegadores que se utilizarán (Edge, Chrome, Firefox, etc.) o bien tenerlos instalados para usar el manejo automatico de versiones de los navegadores (Webdriver-manager) 
 3. Paquetes de Python listados en `requirements.txt`  
-4. Variables de entorno Python
+4. Variables de entorno Python configuradas
 
 # Instalación
-1. Clona este repositorio:
-   git clone https://github.com/dmefrain02/FW_Pruebas_Python_Selenium_VSCode.git
+1. Clonar el siguiente repositorio en la rama main:
+   git clone https://github.com/dmefrain02/FW_Pruebas_Python_Selenium_VSCode
 
 # Desarrollo
 1. Descargar Python de la pagina oficial: https://www.python.org/downloads/
-2. Instalar Python en el equipo local en una carpeta personalizada.
+2. Instalar Python en el equipo local en una carpeta personalizada, para un mejor manejo de la instalación y las variables de entorno.
 3. Descargar Visual Studio Code de la pagina oficial: https://code.visualstudio.com/Download
 4. Instalar Visual Studio Code en el equipo local
-5. En el Visual Studio Code, instalar las extensiones requeridas para faclitar el uso. Entre algunas a instalar se encuentran:
+5. En el Visual Studio Code, instalar las extensiones requeridas para faclitar el uso de VS Code al escribir/ejecutar scripts de pruebas. Entre algunas a instalar se encuentran:
    - Bracket Pair Color DLW
    - Code Runner
    - Cucumber
@@ -95,7 +98,7 @@ Descripción de alto nivel de cómo está organizado el framework:
    - Python
    - Python Debugger
    - Python Enviroments
-7. Crear las siguientes variables de entorno de Python:
+7. Crear las variables de entorno de Python:
    - C:\Python\python.exe
    - C:\Python
    - C:\Python\Lib
@@ -103,19 +106,19 @@ Descripción de alto nivel de cómo está organizado el framework:
    - C:\Python\Lib\site-packages
    - C:\Python\Scripts
    - C:\Python\Scripts\pip.exe
-8. Descargar las librerias para generar reportes Allure localmente: https://repo1.maven.org/maven2/io/qameta/allure/allure-commandline/2.9.0/ 
+8. Descargar las librerias para generar reportes Allure localmente: https://repo1.maven.org/maven2/io/qameta/allure/allure-commandline/2.44.0/ 
 9. Crear las variables de entorno de Allure:
-   - C:\Allure 2_9_0
-   - C:\Allure 2_9_0\bin
-   - C:\Allure 2_9_0\bin\allure.bat
-   - C:\Allure 2_9_0\lib
-   - C:\Allure 2_9_0\config
-   - C:\Allure 2_9_0\plugins
+   - C:\Allure
+   - C:\Allure\bin
+   - C:\Allure\bin\allure.bat
+   - C:\Allure\lib
+   - C:\Allure\config
+   - C:\Allure\plugins
 
 # Configuración
 1. Abrir el folder clonado del repositorio GitHub en Visual Studio Code
 2. En la terminal en Visual Studio Code, instalar la libreria virtualenv para activar el entorno virtual del Framework
-3. En la terminal en Visual Studio Code, activar el entorno virtual del Framework con el archivo activate en la carpeta Scripts del Enviroment.
+3. En la terminal en Visual Studio Code, activar el entorno virtual del Framework con el archivo activate ubicado en la carpeta Scripts del Enviroment.
 4. Instalar las librerias con el archivo 'requirements.txt' en la carpeta raiz del Framework en el entorno virtual activado.
 5. Realizar las configuraciones necesarias para utilizar el Framework, las mismas se realizan en el archivo **src/Function/Inicializar.py**. Las configuraciones a realizar son las siguientes:
     
@@ -132,12 +135,19 @@ Descripción de alto nivel de cómo está organizado el framework:
     - PortSelGrid = "4444" 
     - URL_SeleniumGrid = r"http://localhost:"+PortSelGrid+"/wd/hub"
 
-    **Configurar este arreglo de navegadores según los navegadores que se quieran utilizar en las pruebas, y siguiendo la nomenclatura de navegadores dada en el metodo abrir_navegador para cada navegador. Si no se configura este arrreglo, se puede utilizar el parametro: Navegador**</br>
+    **Configurar el arreglo de navegadores según los navegadores que se quieran utilizar en las pruebas, y siguiendo la nomenclatura de navegadores dada en el metodo abrir_navegador para cada navegador.**
+    **Si no se configura este arrreglo, se puede utilizar el parametro: Navegador**</br>
     Arreglo para utilizar multi-browers en la ejecución de las pruebas.
     **Ejemplos:**
-    - Navegadores_Sel_Grid = ["Chrome_Docker","Firefox_Docker"] -> Navegadores en Selenium Grid en Docker
-    - Navegadores_Sel_Grid = ["Chrome_Remote","Firefox_Remote"] -> Navegadores en Selenium Grid Local
-    - Navegadores_Sel_Grid = ["Chrome","Firefox"]               -> Navegadores Locales
+    - Navegadores_Sel_Grid = ["Chrome_Remote","Firefox_Remote","Edge_Remote"] -> Navegadores en Selenium Grid Local o en Docker
+    - Navegadores_Sel_Grid = ["Chrome","Firefox","Edge]                       -> Navegadores Locales
+
+    **Parámetro que define el navegador a utilizarn en la ejecución de pruebas**
+    - Navegador = 'Edge' | 'Chrome' | 'Firefox'
+
+    **Function\DriverFactory.py clase para la creación de los Drivers de los navegadores ya sea locales o selenium grid local o en docker**
+    - self.DRIVER_CREATORS
+      Diccionario de navegadores que maneja la creación de los navegadores a utilizar en las pruebas apartir del valor enviado en el parámetro **self.Navegador** ya sea como **parámetro individual o através del arreglo de navegadores.**
     
     **Tiempo de espera utilizado dentro del Framework**</br>
     Parámetro para realizar tiempos de espera informales en la ejecución de las pruebas.
@@ -164,18 +174,14 @@ Descripción de alto nivel de cómo está organizado el framework:
         
     **Directorios de archivos Json**</br> 
     Ruta donde se almacenan los archivos JSON de las clases Pages con los localizadores de las páginas de pruebas.
-    - Json = BaseDir + r'\Pages'
+    - Json = BaseDir + r'\Localizadores'
     - JsonRespondata = BaseDir + r'\Data\Json'
     
     **Formato Hora y Fecha**</br>
     Configuración de los formatos de fecha y hora que seran utilizados por el Framework
     - DateFormat = '%d-%m-%Y'
     - HourFormat = '%H%M%S'
-    
-    **Navegador a Utilizar**</br>
-    Parámetro que define el navegador a utilizarn en la ejecución de pruebas
-    - Navegador = 'Edge'
-    
+
     **Ruta Excel para escribir resultados o leer datos**</br> 
     Variable para leer un archivo Excel con datos de pruebas.
     - Excel_Leer_Escribir = BaseDir + r'\Data\Pruebas1.xlsx'
