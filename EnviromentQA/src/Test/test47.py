@@ -7,7 +7,7 @@ class Test(unittest.TestCase):
 
     def setUp(self):
         Selenium.obtener_archivo_json(self, 'Localizadores_Mercado_Libre')
-        Selenium.abrir_navegador(self,"Edge_Docker",True,False,Inicializar.URL_SeleniumGrid,Inicializar.PortSelGrid)
+        Selenium.abrir_navegador(self,"Chrome_Remote", True, False)
         self.functions = Selenium() 
         #self.functions.configurar_entorno_grabacion()
 
