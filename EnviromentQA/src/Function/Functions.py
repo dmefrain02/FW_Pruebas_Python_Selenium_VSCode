@@ -75,49 +75,19 @@ class Functions(Inicializar):
     }
 
     # Método para abrir el navegador según la configuración de Inicializar, el parámetro navegador y la opción de Selenium Grid seleccionada. Se puede abrir un navegador local, en docker o selenium grid local según la configuración.
-    def abrir_navegador(self,navegador=Inicializar.Navegador, Remote = False, capabilities = False, URL_SeleniumGrid = Inicializar.URL_SeleniumGrid,PortSelGrid=Inicializar.PortSelGrid):
+    def abrir_navegador(self,navegador=Inicializar.Navegador, URL_SeleniumGrid = Inicializar.URL_SeleniumGrid,PortSelGrid=Inicializar.PortSelGrid):
         print(u"Directorio Base:" + Inicializar.BaseDir)
         print("-------------------------------------------")
         print(navegador)
         print("-------------------------------------------")
         self.Nav_utilizado_capturas = navegador   
 
-        # Manejo de los Drivers en DriverFactory para los navegadores locales
-        if (navegador == ("Chrome")) or (navegador == ("Edge")) or (navegador == ("Firefox")):
-            self.Driver = DriverFactory(navegador)
-            if navegador ==("Edge"):
-                self.driver = self.Driver.get_driver()
-                #self.driver = Functions.get_driver(self,navegador,Remote,URL_SeleniumGrid)
-            elif navegador == ("Chrome"):
-                self.driver = self.Driver.get_driver()
-            elif navegador ==("Firefox"):
-                self.driver = self.Driver.get_driver()
-            return self.driver
-        
-        # Manejo de los Drivers en DriverFactory para los navegadores remotos en Selenium Grid
-        elif (navegador == ("Chrome_Remote")) or (navegador == ("Edge_Remote")) or (navegador == ("Firefox_Remote")):
-            self.Driver = DriverFactory(navegador,Remote,capabilities,URL_SeleniumGrid,PortSelGrid)
-            if navegador == ("Chrome_Remote"):
-                self.driver = self.Driver.get_driver()
-            if navegador == ("Edge_Remote"):
-                self.driver = self.Driver.get_driver()
-            if navegador == ("Firefox_Remote"):
-                self.driver = self.Driver.get_driver()
-            return self.driver
-            
-        # Manejo de los Drivers en DriverFactory para los navegadores remotos en Selenium Grid con Docker
-        elif (navegador == ("Chrome_Docker")) or (navegador == ("Edge_Docker")) or (navegador == ("Firefox_Docker")):
-            self.Driver = DriverFactory(navegador,Remote,capabilities,URL_SeleniumGrid,PortSelGrid)
-            if navegador == ("Chrome_Docker"):
-                self.driver = self.Driver.get_driver()
-            if navegador == ("Edge_Docker"):
-                self.driver = self.Driver.get_driver()
-            if navegador == ("Firefox_Docker"):
-                self.driver = self.Driver.get_driver()
-            return self.driver
-
-        else:
-             raise ValueError(f"Navegador {navegador} no se encuentra soportado.")
+        # Crear una instancia de DriverFactory con la URL y el puerto de Selenium Grid
+        self.DriverFactory = DriverFactory(navegador)
+        # Obtener el driver del navegador especificado
+        self.driver = self.DriverFactory.get_driver()
+        print(f"Se abrió el navegador {navegador} correctamente.")
+        return self.driver  
     
     #Cerrar la instancia del navegador
     def cerrar_driver_navegador(self):
