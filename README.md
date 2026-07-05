@@ -10,7 +10,7 @@ Este es un Framework de Automatización de pruebas web con **Python** y **Seleni
 6.  [Instalación del Framework](#Instalación)  
 7.  [Requisitos De Desarrollo](#Desarrollo) 
 8.  [Configuración](#Configuración)  
-9.  [Diagramas] (#Diagramas)
+9.  [Diagramas](#Diagramas)
 10. [Roadmap De Mejoras en Progreso](#RoadMap) 
 11.  [Ejecutar Pruebas Python](#Ejecutar-pruebas-pyhon)
 12. [Ejecutar Pruebas Python Behave](#Ejecutar-pruebas-pyhon-behave)
