@@ -2,24 +2,26 @@
 Este es un Framework de Automatización de pruebas web con **Python** y **Selenium**, se encuentra diseñado como un framework escalable y mantenible para proyectos de calidad (QA).
 
 # Tabla de Contenidos
-1. [Descripción](#Descripción)  
-2. [Motivación](#Motivación)  
-3. [Arquitectura](#Arquitectura)  
-4. [Tecnologías](#Tecnologías)  
-5. [Requisitos del Framework](#Requisitos)  
-6. [Instalación del Framework](#Instalación)  
-7. [Requisitos De Desarrollo](#Desarrollo) 
-8. [Configuración](#Configuración)  
-9. [Ejecutar Pruebas Python](#Ejecutar-pruebas-pyhon)
-10. [Ejecutar Pruebas Python Behave](#Ejecutar-pruebas-pyhon-behave)
-11. [Evidencias](#Evidencias-pruebas)
-12. [Docker](#Ejecutar-pruebas-Docker)
-13. [Integración Continua Jenkins](#CI-CD-Jenkins)
-14. [Reportes](#Reportes)  
-15. [Contribuir](#Contribuir)  
-16. [Licencia](#Licencia)  
-17. [Autor](#Autor)  
-18. [Versión del Framework](#Versión)
+1.  [Descripción](#Descripción)  
+2.  [Motivación](#Motivación)  
+3.  [Arquitectura](#Arquitectura)  
+4.  [Tecnologías](#Tecnologías)  
+5.  [Requisitos del Framework](#Requisitos)  
+6.  [Instalación del Framework](#Instalación)  
+7.  [Requisitos De Desarrollo](#Desarrollo) 
+8.  [Configuración](#Configuración)  
+9.  [Diagramas] (#Diagramas)
+10. [Roadmap De Mejoras en Progreso](#RoadMap) 
+11.  [Ejecutar Pruebas Python](#Ejecutar-pruebas-pyhon)
+12. [Ejecutar Pruebas Python Behave](#Ejecutar-pruebas-pyhon-behave)
+13. [Evidencias](#Evidencias-pruebas)
+14. [Docker](#Ejecutar-pruebas-Docker)
+15. [Integración Continua Jenkins](#CI-CD-Jenkins)
+16. [Reportes](#Reportes)  
+17. [Contribuir](#Contribuir)  
+18. [Licencia](#Licencia)  
+19. [Autor](#Autor)  
+20. [Versión del Framework](#Versión)
 
 # Descripción
 En este framework se proporciona una base organizada para automatizar pruebas web utilizando Selenium y Python mediante buenas prácticas como: Page Object Model, manejo automático de versiones de los navegadores, posibilidad de utilizar contenedores Docker con Tecnologia VNC para visualizar las ejecuciones de pruebas, escribir/ejecutar pruebas en formato Behave y generacion de distintos tipos de reportes (Allure, Reportes Behave y Reporte Html-TestRunner).
@@ -145,6 +147,8 @@ Descripción de alto nivel de cómo se encuentra organizado el framework:
     **Parámetro que define el navegador a utilizarn en la ejecución de pruebas**
     - Navegador = 'Edge' | 'Chrome' | 'Firefox'
 
+   **Function\Functions.py clase que maneja las funcionaes de Selenim y métodos utilitarios**
+
     **Function\DriverFactory.py clase para la creación de los Drivers de los navegadores ya sea locales o selenium grid local o en docker**
     - self.DRIVER_CREATORS
       Diccionario de navegadores que maneja la creación de los navegadores a utilizar en las pruebas apartir del valor enviado en el parámetro **self.Navegador** ya sea como **parámetro individual o através del arreglo de navegadores.**
@@ -212,8 +216,64 @@ Descripción de alto nivel de cómo se encuentra organizado el framework:
     USER_PROD = ''
     Cadena_Conexion_Prod = 'DRIVER={ODBC Driver 17 for SQL Server}; SERVER=[Servidor BD];DATABASE=[Base de Datos];UID=[User Base de Datos];PWD=[Contraseña Base de Datos]
 
+# Diagramas
+**Organización del Proyecto**
+src
+│
+├── Pages
+├── Test
+├── Drivers
+├── Docker
+├── Features
+│   └── steps
+├── Localizadores
+├── Data
+├── Reports
+├── Function
+│
+└── Inicializar.py
+
+**Organización de los Datos**
+Tests
+   │
+   ├───────────────┐
+   ▼               ▼
+Pages          JSON Locators
+   │
+   ▼
+Functions
+   │
+   ▼
+DriverFactory
+
+**Organización Operativa del Framework**
+           Tests
+             │
+             ▼
+        Page Objects
+             │
+             ▼
+         Functions
+
+             │
+             ▼
+          DriverFactory
+
+# RoadMap 
+| **Estado**  |	**Mejora**                |
+|     ✅	   |  *JSON Locators*             |
+|     ✅	   |  *DriverFactory*             |
+|     🔄	    |  *Refactorización Functions* |
+|     🔄	    |  *Refactorización Pages*     |
+|     ⏳	   |  *Utility Classes*           |
+|     ⏳	   |  *Base Page*                 |
+|     ⏳	   |  *Common Components*         |
+|     ⏳	   |  *GitHub Actions*            |
+|     ⏳	   |  *Jenkins*                   |
+|     ⏳	   |  *SonarCloud*                |
+
 # Versión
-  📌 La versión actual del framework es: **3.0.0**  
+  📌 La versión actual del framework es: **3.1.0**  
 
 # Licencia
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE) </br>
@@ -221,4 +281,4 @@ Este Framework de automatizacion de prueba se encuentra bajo licencia de uso MIT
 https://github.com/dmefrain02/FW_Pruebas_Python_Selenium_VSCode
 
 # Autor
-**Ing. en Sistemas Efraín Castañeda Delgado, Costa Rica**
+**Ing. en Sistemas Efraín Castañeda Delgado, Cartago, Costa Rica**
