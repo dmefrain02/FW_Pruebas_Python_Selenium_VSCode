@@ -58,7 +58,7 @@ Descripción de alto nivel de cómo se encuentra organizado el framework:
 | `src/Archivos a Cargar`            | Archivos utilizados para pruebas                                                                              |
 | `src/Archivos Descargados`         | Archivos descargados durante las pruebas                                                                      |
 | `src/Localizadores`                | Archivos JSON que contienen los localizadores de los elmentos de las páginas de los scripts de pruebas.       |
-|------------------------------------|---------------------------------------------------------------------------------------------------------------|
+|                                    |                                                                                                               |
 
 # Tecnologías
 - Python
