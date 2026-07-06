@@ -38,7 +38,7 @@ Descripción de alto nivel de cómo se encuentra organizado el framework:
 | Ruta                               | Descripción                                                                                                   |
 |------------------------------------|---------------------------------------------------------------------------------------------------------------|
 | `/src`                             | Carpeta raíz del framework                                                                                    |
-| `/src/Pages`                       | Objetos de página (Page Objects) con las acciones de las Pages y de donde se leen los elementos en la paginas 
+| `/src/Pages`                       | Objetos de página (Page Objects) con las acciones de las Pages y de donde se leen los elementos en la paginas | 
                                        através de archivos JSON que contienen los localizadores  de los elementos (en proceso de refactorización).   | 
 | `/src/Test`                        | Scripts de Pruebas creados                                                                                    |
 | `/src/Function/Functions.py`       | Funciones Selenium y médotos utilitarios del Framework (en proceso de refactorización).                       |
