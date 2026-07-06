@@ -39,10 +39,11 @@ Descripción de alto nivel de cómo se encuentra organizado el framework:
 |------------------------------------|---------------------------------------------------------------------------------------------------------------|
 | `/src`                             | Carpeta raíz del framework                                                                                    |
 | `/src/Pages`                       | Objetos de página (Page Objects) con las acciones de las Pages y de donde se leen los elementos en la paginas |
-|                                    | através de archivos JSON que contienen los localizadores  de los elementos (en proceso de refactorización).   | 
+                                       através de archivos JSON que contienen los localizadores  de los elementos (en proceso de refactorización).    
 | `/src/Test`                        | Scripts de Pruebas creados                                                                                    |
 | `/src/Function/Functions.py`       | Funciones Selenium y médotos utilitarios del Framework (en proceso de refactorización).                       |
 | `src/Function/Inicializar.py`      | Configuraciones generales del framework (rutas utilzadas y demás configuraciones)                             |
+| `src/Function/DriversFactory.py`   | Manejo y creación de los Drivers                                                                              |
 | `src/Features`                     | Escenarios de Pruebas escritos en formato Gherkin                                                             |
 | `src/Features/steps`               | Steps de los escenarios de pruebas escritos en formato Gherkin                                                |
 | `src/Drivers`                      | Drivers de los navegadores                                                                                    |
@@ -108,7 +109,9 @@ Descripción de alto nivel de cómo se encuentra organizado el framework:
    - C:\Python\Lib\site-packages
    - C:\Python\Scripts
    - C:\Python\Scripts\pip.exe
-8. Descargar las librerias para generar reportes Allure localmente: https://repo1.maven.org/maven2/io/qameta/allure/allure-commandline/2.44.0/ 
+8. Descargar las librerias para generar reportes Allure localmente: https://repo1.maven.org/maven2/io/qameta/allure/allure-commandline/2.39.0/
+    Nota: Hay versiones más recientes de Allure (de 2.40 a 2.44), estás todavía no se encuentran validadas en su funcinamiento en el framework.
+    Pueden generar errores. Se estarán validando, actualizando y habilitando    proximamente.
 9. Crear las variables de entorno de Allure:
    - C:\Allure
    - C:\Allure\bin
