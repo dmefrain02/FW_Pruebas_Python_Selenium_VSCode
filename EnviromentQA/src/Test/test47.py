@@ -1,15 +1,14 @@
 # -*- coding: utf-8 -*- 
 import unittest
-from src.Function.Functions import Functions as Selenium
 from src.Pages.GooglePage import GooglePage
 from src.Function.Inicializar import Inicializar
 
 class Test(unittest.TestCase):
 
     def setUp(self):
-        Selenium.obtener_archivo_json(self, 'Localizadores_Mercado_Libre')
-        self.functions = Selenium()
-
+        self.Google = GooglePage()
+        self.Google.obtener_archivo_json('Localizadores_Mercado_Libre')
+        
         #self.functions.configurar_entorno_grabacion()
 
     def Test_01(self):
@@ -31,21 +30,20 @@ class Test(unittest.TestCase):
         Selenium.esperar_elemento(self, 5)
 
     def test_08(self):
-        Selenium.abrir_navegador(self,"Chrome", True, False)
-        #self.Google.open_browser("Chrome")
-        Selenium.get_url_driver(self,"https://www.google.com/")
-        #self.Google.goToURL("https://www.google.com/")
-        Selenium.Click_Element(self, "Google","txt_busqueda_google")
-        Selenium.esperar_elemento(self, 3)
-        Selenium.SendKeys(self, "Google","txt_busqueda_google", "Selenium")
-        Selenium.Clear_Element(self, "Google","txt_busqueda_google")
-        Selenium.Scroll_Element_JS(self, "Google","txt_busqueda_google")
-        Selenium.SendKeys(self, "Google","txt_busqueda_google", "Selenium 2") 
-        Selenium.Double_Click(self, "Google","txt_busqueda_google")
-        Selenium.Click_Derecho(self, "Google","txt_busqueda_google")
-        Selenium.Explicit_Wait_Element(self, "Google","txt_busqueda_google", 15)
-        Selenium.Move_Element(self, "Google","txt_busqueda_google")
-        Selenium.esperar_elemento(self, 3)
+        self.Google.open_browser("Chrome")
+        self.Google.goToURL("https://www.google.com/")
+        self.Google.espera_elemento()
+        #self.Google.hacer_Click("Google","txt_busqueda_google")
+        #Selenium.esperar_elemento(self, 3)
+        #Selenium.SendKeys(self, "Google","txt_busqueda_google", "Selenium")
+        #Selenium.Clear_Element(self, "Google","txt_busqueda_google")
+        #Selenium.Scroll_Element_JS(self, "Google","txt_busqueda_google")
+        #Selenium.SendKeys(self, "Google","txt_busqueda_google", "Selenium 2") 
+        #Selenium.Double_Click(self, "Google","txt_busqueda_google")
+        #Selenium.Click_Derecho(self, "Google","txt_busqueda_google")
+        ##Selenium.Explicit_Wait_Element(self, "Google","txt_busqueda_google", 15)
+        #Selenium.Move_Element(self, "Google","txt_busqueda_google")
+        #Selenium.esperar_elemento(self, 3)
 
     def Test_03(self):
         for Nav_Sel_Grid in Inicializar.Navegadores_Sel_Grid:
@@ -109,7 +107,7 @@ class Test(unittest.TestCase):
 
     def tearDown(self):
         #self.functions.detener_grabacion()      
-        Selenium.cerrar_driver_navegador(self)
+        self.Google.cerrar_driver_navegador()
 
 if __name__ == "__main__":
     #import sys;sys.argv = ['', 'Test.testName']
