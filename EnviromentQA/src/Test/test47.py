@@ -1,14 +1,15 @@
 # -*- coding: utf-8 -*- 
 import unittest
 from src.Function.Functions import Functions as Selenium
+from src.Pages.GooglePage import GooglePage
 from src.Function.Inicializar import Inicializar
 
 class Test(unittest.TestCase):
 
     def setUp(self):
         Selenium.obtener_archivo_json(self, 'Localizadores_Mercado_Libre')
-        Selenium.abrir_navegador(self,"Chrome_Remote", True, False)
-        self.functions = Selenium() 
+        self.functions = Selenium()
+
         #self.functions.configurar_entorno_grabacion()
 
     def Test_01(self):
@@ -30,7 +31,10 @@ class Test(unittest.TestCase):
         Selenium.esperar_elemento(self, 5)
 
     def test_08(self):
+        Selenium.abrir_navegador(self,"Chrome", True, False)
+        #self.Google.open_browser("Chrome")
         Selenium.get_url_driver(self,"https://www.google.com/")
+        #self.Google.goToURL("https://www.google.com/")
         Selenium.Click_Element(self, "Google","txt_busqueda_google")
         Selenium.esperar_elemento(self, 3)
         Selenium.SendKeys(self, "Google","txt_busqueda_google", "Selenium")

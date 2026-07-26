@@ -1,25 +1,5 @@
-#Libreria Selenium
-import selenium
-#Libreria Webdriver
-from selenium import webdriver
-
-#Librerias Webdrivers Services de los navegadores
-from selenium.webdriver.chrome.service import Service as ChromeService 
-from selenium.webdriver.firefox.service import Service as FirefoxService
-from selenium.webdriver.edge.service import Service as EdgeService
-#Librerias Webdrivers options de los navegadores
-from selenium.webdriver.chrome.options import Options as OpcionesChrome
-from selenium.webdriver.firefox.options import Options as OpcionesFirefox
-from selenium.webdriver.edge.options import Options as OpcionesEdge
-
-#Librerias Webdrivers Manager de los navegadores
-from webdriver_manager.chrome import ChromeDriverManager
-from webdriver_manager.firefox import GeckoDriverManager
-from webdriver_manager.microsoft import EdgeChromiumDriverManager
-
 #Librerias Webdrivers funcionalidades
 from selenium.webdriver.common.action_chains import ActionChains
-from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 from selenium.webdriver.remote.webelement import isDisplayed_js
 from selenium.webdriver.support.ui import Select
 from selenium.webdriver.common.by import By
@@ -33,10 +13,6 @@ import numpy as np
 from mss import MSS
 import threading
 
-#from selenium.webdriver.common.print_page_options import PrintOptions as PrintOptions
-#import base64
-#import aspose.pdf as ap
-#import urllib
 from src.Function.Inicializar import Inicializar
 from src.Function.DriverFactory import DriverFactory
 from selenium.common.exceptions import NoSuchElementException,NoAlertPresentException,NoSuchWindowException,TimeoutException, UnexpectedAlertPresentException, WebDriverException
@@ -51,8 +27,6 @@ import pyodbc
 from allure_commons.types import AttachmentType
 from PIL import Image #Pillow - Manejo de Imagenes
 from io import BytesIO #Para conocer tamaños en bytes, ya esta instalado en Python
-from unittest.case import skip
-from threading import Thread,Barrier
 
 class Functions(Inicializar):
     
