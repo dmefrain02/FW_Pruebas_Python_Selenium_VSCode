@@ -12,8 +12,7 @@ from mss import MSS
 import threading
 
 from src.Function.Inicializar import Inicializar
-from src.Function.DriverFactory import DriverFactory
-from selenium.common.exceptions import NoSuchElementException,NoAlertPresentException,NoSuchWindowException,TimeoutException, UnexpectedAlertPresentException, WebDriverException
+from selenium.common.exceptions import NoSuchElementException,TimeoutException
 import pytest
 import time
 import openpyxl
