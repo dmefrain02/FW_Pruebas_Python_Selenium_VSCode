@@ -63,7 +63,6 @@ class DriverFactory():
             options.add_argument("--disable-extensions")#Deshabilita extensiones innecesarias
             chrome_driver_path = ChromeDriverManager().install() #Usa webdriver-manager para obtener la última versión compatible
             self.driver = webdriver.Chrome(service=ChromeService(chrome_driver_path), options=options)
-            print(self.driver)
             return self.driver
         except WebDriverException as ex:
                 self._handle_driver_exception(ex)
