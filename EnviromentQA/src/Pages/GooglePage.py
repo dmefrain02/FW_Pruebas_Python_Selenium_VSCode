@@ -46,3 +46,6 @@ class GooglePage(BasePageObjects):
 
     def move_to_element(self, driver, entidad, valor_busqueda):
         self.action_selenium.Move_Element(driver,entidad,valor_busqueda)
+
+    def mover_entre_elementos(self, driver, page1, elemento1, page2, elemento2):
+        self.action_selenium.Mover_Mouse_entre_elementos(driver,page1,elemento1,page2,elemento2)

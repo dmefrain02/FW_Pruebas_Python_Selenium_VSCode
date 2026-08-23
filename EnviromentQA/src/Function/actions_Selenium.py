@@ -224,3 +224,18 @@ class actions_Selenium:
             print(u'Mover_mouse: no se encontro el elemento ' + str(page) + ' con el valor ' + str(elemento))
         except TimeoutException:
             print(u'Mover_mouse: no se encontro el elemento ' + str(page) + ' con el valor ' + str(elemento))
+
+    #Mover Mouse entre elementos en aplicativo web       
+    def Mover_Mouse_entre_elementos(self,driver, page1, elemento1, page2, elemento2):
+        action =ActionChains(driver)
+        element1 = actions_Selenium.Get_Element(self, page1, elemento1, driver)
+        element2 = actions_Selenium.Get_Element(self, page2, elemento2, driver)
+        print(element2)
+
+        try:
+            #Mover Cursor
+            action.move_to_element(element1).move_to_element(element2).perform()
+        except NoSuchElementException:
+            print(u'Mover Cursor: no se logro realizar la accion ' + self.json_ValueToFind)
+        except TimeoutException:
+            print(u'Mover Cursor: no se logro realizar la accion ' + self.json_ValueToFind)

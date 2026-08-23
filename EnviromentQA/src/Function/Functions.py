@@ -277,22 +277,6 @@ class Functions(Inicializar):
             print(u'Drap_and_Drop: no se logro realizar la accion entre los elementos ' + self.json_ValueToFind)
             Functions.cerrar_driver_navegador(self)
     
-    #Mover Mouse entre elementos en aplicativo web       
-    def Mover_Mouse(self,elemento1, elemento2):
-        action =ActionChains(self.driver)
-        element1 = Functions.obtener_elemento(self, elemento1)
-        element2 = Functions.obtener_elemento(self, elemento2)
-        
-        try:
-            #Mover Cursor
-            action.move_to_element(element1).move_to_element(element2).perform()
-        except NoSuchElementException:
-            print(u'Mover Cursor: no se logro realizar la accion ' + self.json_ValueToFind)
-            Functions.cerrar_driver_navegador(self)
-        except TimeoutException:
-            print(u'Mover Cursor: no se logro realizar la accion ' + self.json_ValueToFind)
-            Functions.cerrar_driver_navegador(self)
-    
     #Descargar Archivo
     def download_file(self,*elemento):
         Functions.esperar_elemento(self)

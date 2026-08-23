@@ -33,6 +33,7 @@ class Test(unittest.TestCase):
         self.driver = self.Google.open_browser("Chrome")
         self.Google.goToURL("https://www.google.com/")
         self.Google.espera_elemento()
+        self.Google.mover_entre_elementos(self.driver,"Google","txt_busqueda_google","Google1","img_google")
         self.Google.scroll_to_element(self.driver,"Google","txt_busqueda_google")
         self.Google.double_click(self.driver,"Google","txt_busqueda_google")
         self.Google.click_derecho(self.driver,"Google","txt_busqueda_google")

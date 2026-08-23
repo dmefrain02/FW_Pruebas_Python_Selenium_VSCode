@@ -11,6 +11,12 @@
 			"ValueToFind":"ti6dpd"
 		}
 	},
+	"Google1":{
+		"img_google":{
+			"GetFieldBy":"xpath",
+			"ValueToFind":"//div[@class='naW5gc uZekje']//*[name()='svg']"
+		}
+	},
 	"Producto_Buscado":{
 		"GetFieldBy":"xpath",
 		"ValueToFind":"//body/main[@id='root-app']/div[1]/div[2]/section[1]/div[5]/ol[1]/li[1]/div[1]/div[1]/div[1]/div[2]/h3[1]"
