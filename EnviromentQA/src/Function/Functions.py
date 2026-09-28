@@ -17,8 +17,7 @@ import pytest
 import time
 import openpyxl
 import re # para expresiones regulares
-import os # para capturas
-import allure
+
 import pyodbc
 from allure_commons.types import AttachmentType
 from PIL import Image #Pillow - Manejo de Imagenes
@@ -81,48 +80,7 @@ class Functions(Inicializar):
     
     def WebdriverWait(self,time):
         WebDriverWait(self.driver,time)
-    
-    #Obtener fecha actual
-    def obtener_fecha_actual(self):
-        self.fecha = time.strftime(Inicializar.DateFormat)#Formato Fecha
-        return self.fecha
-    
-    #Obtener hora actual
-    def obtener_hora_actual(self):
-        self.hora = time.strftime(Inicializar.HourFormat)#Formato 24Hrs
-        return self.hora
-    
-    #Crear ruta para capturas de pantallas
-    def crear_path(self):
-        fecha = Functions.obtener_fecha_actual(self)
-        GeneralPath = Inicializar.Path_Evidencias
-        print(f'Ruta General de las Capturas: {GeneralPath}')
-        DriverTest = self.Nav_utilizado_capturas            
-        TestCase =self.__class__.__name__
-
-        HoraActual = Functions.obtener_hora_actual(self)
-        
-        if   ((Inicializar.TestCase_x_Context =="S") and (GeneralPath != "")):
-            path = f"{GeneralPath}\{fecha}\Pruebas\{TestCase}\{DriverTest}\{HoraActual}"
-            print(f"Ruta Contruida para guardar las capturas: {path}")
-        elif ((Inicializar.TestCase_x_Context == "N") and (GeneralPath != "")):
-            path =f"{GeneralPath}\{fecha}\{TestCase}\{DriverTest}\{HoraActual}"
-            print(f"Ruta Contruida para guardar las capturas: {path}")
-        elif (((Inicializar.TestCase_x_Context == "N") or (Inicializar.TestCase_x_Context == "S")) and (GeneralPath == "")):
-            path = f'{Inicializar.BaseDir}\Capturas\{fecha}\{TestCase}\{DriverTest}\{HoraActual}'
-            print(f'No se encuentra establecida la ruta para guardar la captura de pantalla, se guardara en la carpeta raiz del framework de pruebas.\nEn: {path}')
-        elif (((Inicializar.TestCase_x_Context !="S") or (Inicializar.TestCase_x_Context !="N") or (Inicializar.TestCase_x_Context == "")) and (GeneralPath == "")): 
-            path = ""
-            print(f'No se logro crear el path para guardar la captura de pantalla. Variables de "TestCase_x_Context" y "GeneralPath" no se han configurado correctamente: Tienen el valor: {GeneralPath} y {Inicializar.TestCase_x_Context}')
-
-        if (path != ""):
-            if not os.path.exists(path):
-                os.makedirs(path)
-            
-            return path
-        else:
-            return Inicializar.Warning_Evidencias
-        
+          
     def crear_path_evidencias_video(self):
         fecha = Functions.obtener_fecha_actual(self)
         GeneralPath = Inicializar.Path_Videos
@@ -144,24 +102,6 @@ class Functions(Inicializar):
             else:
                 return Inicializar.Warning_Evidencias
 
-    #Realizar captura de pantalla
-    def capturar_pantalla(self):
-        Path=Functions.crear_path(self)
-        TestCase =self.__class__.__name__
-        
-        if Path != Inicializar.Warning_Capturas:
-            img = f'{Path}\{TestCase}\
-            ('+Functions.obtener_fecha_actual(self)+' - '+ Functions.obtener_hora_actual(self)+')'+'.png'
-            
-            print(f'Se realizo captura de pantalla de la prueba: {img}')
-            return self.driver.get_screenshot_as_file(img)
-        else:
-            print("Warning: No se logro generar la captura de pantalla. No se encuentra configurada el Path y variable contexto.")
-    
-    #Realizar captura de pantalla en reporte Allure
-    def captura_pantalla_allure(self,Descripcion):
-        allure.attach(self.driver.get_screenshot_as_png(),Descripcion,allure.attachment_type.PNG)
-    
     #Realizar conexion a BD     
     def pyodbc_conexionBD(self,Env):
             

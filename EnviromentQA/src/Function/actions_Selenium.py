@@ -12,7 +12,7 @@ from selenium.common.exceptions import NoSuchElementException,NoAlertPresentExce
 import json
 import pytest
 
-class actions_Selenium:
+class Actions_Selenium:
 
     # Diccionario para mapear las estrategias de búsqueda a los valores de By
     BY = {
@@ -68,12 +68,12 @@ class actions_Selenium:
             
     # Método genérico para obtener un elemento a partir del archivo JSON
     def Get_Element(self,page, elemento, driver=None):
-        GetEntity = actions_Selenium.Get_Entity(self, page, elemento)
+        GetEntity = Actions_Selenium.Get_Entity(self, page, elemento)
         if GetEntity is None:
             print(u'No se encontro el valor de la entidad buscada en el archivo .Json')
         else:
             try:
-                elemento = actions_Selenium.Find_Element_On_DOM(self,GetEntity["GetFieldBy"].upper(), GetEntity["ValueToFind"],driver) 
+                elemento = Actions_Selenium.Find_Element_On_DOM(self,GetEntity["GetFieldBy"].upper(), GetEntity["ValueToFind"],driver) 
                 print(u'Obtener Elemento: se encontro el elemento: ' + GetEntity["GetFieldBy"] + ' con el valor: ' + GetEntity["ValueToFind"])
                 return elemento
             except NoSuchElementException:
@@ -83,7 +83,7 @@ class actions_Selenium:
     
     # Método para obtener el texto de un elemento a partir de la entidad del archivo JSON
     def Get_Text(self,page, elemento):
-        GetEntity = actions_Selenium.Get_Element(self, page, elemento)
+        GetEntity = Actions_Selenium.Get_Element(self, page, elemento)
         try:
             print(u'Obtener Texto: Texto en el elemento ' + str(elemento))
             return GetEntity.text
@@ -94,7 +94,7 @@ class actions_Selenium:
 
     # Método para hacer click en un elemento a partir de la entidad del archivo JSON 
     def Click_Element(self,driver,page, elemento):
-        GetEntity = actions_Selenium.Get_Element(self, page, elemento, driver)
+        GetEntity = Actions_Selenium.Get_Element(self, page, elemento, driver)
         try:
             print(u'Se realizo click en el elemento ' + str(elemento))
             return GetEntity.click()
@@ -105,7 +105,7 @@ class actions_Selenium:
     
     # Método para enviar texto a un elemento a partir de la entidad del archivo JSON
     def SendKeys(self,driver, page,elemento,texto):
-        GetEntity = actions_Selenium.Get_Element(self, page, elemento, driver)
+        GetEntity = Actions_Selenium.Get_Element(self, page, elemento, driver)
         try:
             print(f'Escribir texto: se escribio el texto {texto} en el elemento {elemento}')
             return GetEntity.send_keys(texto)
@@ -118,13 +118,13 @@ class actions_Selenium:
     def Send_Keys_Specific(self,driver, page,elemento,key):
         try:
             if key.lower()=='enter':
-                actions_Selenium.Get_Element(self,page,elemento,driver).send_keys(Keys.ENTER)
+                Actions_Selenium.Get_Element(self,page,elemento,driver).send_keys(Keys.ENTER)
                 print(u'Se presiono la tecla ' + key + ' en el elemento indicado: ' + str(elemento))
             if key.lower()=='tab':
-                actions_Selenium.Get_Element(self,page,elemento,driver).send_keys(Keys.TAB)
+                Actions_Selenium.Get_Element(self,page,elemento,driver).send_keys(Keys.TAB)
                 print(u'Se presiono la tecla ' + key + ' en el elemento indicado: ' + str(elemento))
             if key.lower()=='space':
-                actions_Selenium.Get_Element(self,page,elemento,driver).send_keys(Keys.SPACE)   
+                Actions_Selenium.Get_Element(self,page,elemento,driver).send_keys(Keys.SPACE)   
                 print(u'Se presiono la tecla ' + key + ' en el elemento indicado: ' + str(elemento))
                 
         except TimeoutException:  
@@ -132,7 +132,7 @@ class actions_Selenium:
 
     # Método para limpiar el texto de un elemento a partir de la entidad del archivo JSON
     def Clear_Element(self,driver,page, elemento):  
-        GetEntity = actions_Selenium.Get_Element(self, page, elemento, driver)
+        GetEntity = Actions_Selenium.Get_Element(self, page, elemento, driver)
         try:
             print(u'Limpiar Elemento: Se limpio el elemento ' + str(elemento))
             return GetEntity.clear()
@@ -143,12 +143,12 @@ class actions_Selenium:
 
     # Método para obtener un elemento select a partir de la entidad del archivo JSON
     def Get_Element_Select(self,page, elemento):
-        GetEntity = actions_Selenium.Get_Entity(self, page, elemento)
+        GetEntity = Actions_Selenium.Get_Entity(self, page, elemento)
         if GetEntity is None:
             print(u'No se encontro el valor de la entidad buscada en el archivo .Json')
         else:
             try:
-                select = Select(self.driver.find_element(actions_Selenium.BY[GetEntity["GetFieldBy"].upper()],GetEntity["ValueToFind"]))
+                select = Select(self.driver.find_element(Actions_Selenium.BY[GetEntity["GetFieldBy"].upper()],GetEntity["ValueToFind"]))
                 print(u"get elements: " + GetEntity["ValueToFind"]) 
                 return select
             except NoSuchElementException:
@@ -158,19 +158,19 @@ class actions_Selenium:
 
     # Método para seleccionar un elemento de un select por su texto visible a partir de la entidad del archivo JSON  
     def obtener_elemento_select_texto(self,page, elemento, texto):
-        select = actions_Selenium.Get_Element_Select(self, page, elemento)
+        select = Actions_Selenium.Get_Element_Select(self, page, elemento)
         select.select_by_visible_text(texto)
     
     # Método para esperar explícitamente a que un elemento sea visible y clickeable a partir de la entidad del archivo JSON          
     def Explicit_Wait_Element(self,driver,page, elemento, tiempo_espera):  
-        GetEntity = actions_Selenium.Get_Entity(self, page, elemento)
+        GetEntity = Actions_Selenium.Get_Entity(self, page, elemento)
         if GetEntity is None:
             print(u'No se encontro el valor de la entidad buscada en el archivo .Json')
         else:
             try:
                 wait =WebDriverWait(driver,tiempo_espera)
-                wait.until(EC.visibility_of_element_located((actions_Selenium.BY[GetEntity["GetFieldBy"].upper()],GetEntity["ValueToFind"])))
-                wait.until(EC.element_to_be_clickable((actions_Selenium.BY[GetEntity["GetFieldBy"].upper()],GetEntity["ValueToFind"])))   
+                wait.until(EC.visibility_of_element_located((Actions_Selenium.BY[GetEntity["GetFieldBy"].upper()],GetEntity["ValueToFind"])))
+                wait.until(EC.element_to_be_clickable((Actions_Selenium.BY[GetEntity["GetFieldBy"].upper()],GetEntity["ValueToFind"])))   
                 print(u'Espera explicita: se visualizo el elemento ' + str(page) + ' con el valor ' + GetEntity["ValueToFind"])
                 return True
             except NoSuchElementException:
@@ -180,7 +180,7 @@ class actions_Selenium:
 
     # Método para realizar scroll hasta un elemento a partir de la entidad del archivo JSON
     def Scroll_Element_JS(self, driver, page, elemento):
-        GetEntity = actions_Selenium.Get_Element(self, page, elemento, driver)
+        GetEntity = Actions_Selenium.Get_Element(self, page, elemento, driver)
         try: 
             driver.execute_script("arguments[0].scrollIntoView();", GetEntity)
             print(u'JS Scroll: Se realizo scroll_to hasta el elemento ' + str(page) + ' con el valor ' + elemento)
@@ -191,7 +191,7 @@ class actions_Selenium:
     # Método para hacer doble click en un elemento a partir de la entidad del archivo JSON
     def Double_Click(self, driver, page, elemento):
         action =ActionChains(driver)
-        element = actions_Selenium.Get_Element(self, page, elemento, driver)
+        element = Actions_Selenium.Get_Element(self, page, elemento, driver)
         try:
             action.double_click(element).perform()
             print(f'Double Click: se realizo doble click en el elemento ' + str(page) + ' con el valor ' + str(elemento))
@@ -204,7 +204,7 @@ class actions_Selenium:
     # Método para hacer click derecho en un elemento a partir de la entidad del archivo JSON    
     def Click_Derecho(self, driver,page, elemento):
         action =ActionChains(driver)
-        element = actions_Selenium.Get_Element(self, page, elemento, driver)
+        element = Actions_Selenium.Get_Element(self, page, elemento, driver)
         try:
             action.context_click(element).perform()
             print(f'Click Derecho: se realizo click derecho en el elemento ' + str(page) + ' con el valor ' + str(elemento))
@@ -216,7 +216,7 @@ class actions_Selenium:
     # Método para mover el mouse a un elemento a partir de la entidad del archivo JSON
     def Move_Element(self, driver, page, elemento):
         action = ActionChains(driver)
-        element = actions_Selenium.Get_Element(self, page, elemento, driver)
+        element = Actions_Selenium.Get_Element(self, page, elemento, driver)
         try:
             action.move_to_element(element).perform()
             print(f'Mover Mouse: se movio el mouse al elemento ' + str(page) + ' con el valor ' + str(elemento))
@@ -228,8 +228,8 @@ class actions_Selenium:
     #Mover Mouse entre elementos en aplicativo web       
     def Mover_Mouse_entre_elementos(self,driver, page1, elemento1, page2, elemento2):
         action =ActionChains(driver)
-        element1 = actions_Selenium.Get_Element(self, page1, elemento1, driver)
-        element2 = actions_Selenium.Get_Element(self, page2, elemento2, driver)
+        element1 = Actions_Selenium.Get_Element(self, page1, elemento1, driver)
+        element2 = Actions_Selenium.Get_Element(self, page2, elemento2, driver)
         print(element2)
 
         try:

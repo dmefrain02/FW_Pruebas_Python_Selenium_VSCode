@@ -43,14 +43,15 @@ class Test(unittest.TestCase):
         self.Google.espera_elemento()
         self.Google.hacer_Click(self.driver,"Google","txt_busqueda_google")
         self.Google.explicit_wait_element(self.driver,"Google","txt_busqueda_google", 10)
-        self.Google.SendKeys(self.driver,"Google","txt_busqueda_google", "Selenium")
+        self.Google.sendKeys(self.driver,"Google","txt_busqueda_google", "Selenium")
         self.Google.limpiar_elemento(self.driver,"Google","txt_busqueda_google")
         self.Google.espera_elemento()
-        self.Google.SendKeys(self.driver,"Google","txt_busqueda_google", "Selenium")
+        self.Google.sendKeys(self.driver,"Google","txt_busqueda_google", "Selenium")
         self.Google.espera_elemento()
         self.Google.move_to_element(self.driver,"Google","txt_busqueda_google")
         self.Google.espera_elemento()
         self.Google.send_keys_specific(self.driver,"Google","txt_busqueda_google", "enter")
+        self.Google.capturar_pantalla("", captura_allure=False)
         self.Google.espera_elemento()
 
     def Test_03(self):

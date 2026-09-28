@@ -4,6 +4,11 @@ class GooglePage(BasePageObjects):
     def __init__(self):
         super().__init__()
 
+    def capturar_pantalla(self, descripcion = "", captura_allure = False):
+        # Si se desea adjuntar la captura de pantalla al reporte Allure, el parámetro captura_allure debe ser True y llevar la descripcion de la captura. 
+        # Caso contrario, se guardara la captura en la ruta configurada o en la carpeta raiz del framework de pruebas.
+        return super().capturar_pantalla(descripcion, captura_allure)
+
     def open_browser(self,navegador):
         self.driver = self.abrir_navegador(navegador)
         return self.driver
@@ -17,7 +22,7 @@ class GooglePage(BasePageObjects):
     def hacer_Click(self, driver, entidad, valor_busqueda):
         self.action_selenium.Click_Element(driver,entidad,valor_busqueda)
 
-    def SendKeys(self, driver, entidad, valor_busqueda, texto):
+    def sendKeys(self, driver, entidad, valor_busqueda, texto):
         self.action_selenium.SendKeys(driver,entidad,valor_busqueda,texto)
 
     def obtener_archivo_json(self,file):
